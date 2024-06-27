@@ -1,0 +1,152 @@
+.mypage-container{
+    margin-top: 19vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.mypage-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mypage-name{
+    font-size: 32px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+}
+
+.mypage-money{
+    width: 22.6vw;
+    height: 18.71vh;
+    border: 1px solid #3F78E7;
+    border-radius: 10px;
+    margin-top: 4.33vh;
+    text-align: center;
+}
+
+.mypage-money-title{
+    font-size: 16px;
+    margin-top: 3vh;
+}
+
+.mypage-money-main{
+    color: #3F78E7;
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: 2.15vh;
+}
+
+.mypage-money-bottom{
+    color: #ABABAB;
+    font-size: 14px;
+    margin-top: 2.15vh;
+}
+
+.mypage-product{
+    width: calc(100vw - 30.21vw);
+    margin-top: 6.74vh;
+}
+
+.mypage-product-title{
+    color: #ABABAB;
+    font-size: 16px;
+}
+
+.mypage-product-content{
+    margin-top: 2.78vh;
+}
+
+.item {
+    position: relative;
+    background-color: white;
+    width: 25vw;
+    height: 35vh;
+    border-radius: 1vw;
+    display: inline-block;
+    margin: 0 0.5vw 6vh 0;
+    box-shadow: 0px 0px 10px 1px rgb(200, 200, 200);
+    cursor: pointer;
+}
+
+.item > .img-box {
+    height: 47%;
+    display: grid;
+    place-items: center;
+}
+
+.item > .text-box {
+    height: 41%;
+    padding: 4%;
+}
+
+.item > .text-box > .left-box {
+    width: 50%;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    text-align: left;
+    font-weight: 600;
+}
+
+.item > .text-box > .right-box {
+    width: 50%;
+    height: 100%;
+    float: right;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.title,
+.funding-money {
+    font-size: 1.1vw;
+}
+
+.funding-money {
+    position: relative;
+    top: 1vh;
+    color: var(--main-light-color);
+}
+
+.using-box {
+    position: absolute;
+    bottom: 4%;
+}
+
+.using-box > span {
+    font-size: 0.8vw;
+    color: var(--text-gray);
+    font-weight: 400;
+}
+
+.using-box > span > i {
+    color: var(--text-gray);
+}
+
+.item > .text-box > .right-box > .percent,
+.item > .text-box > .right-box > .percent-text {
+    position: relative;
+    top: 1vh;
+    color: var(--main-color);
+    font-size: 2.2vw;
+    font-weight: 700;
+}
+
+.item > .text-box > .right-box > .d-day-box {
+    position: absolute;
+    bottom: 4%;
+    right: 4%;
+    background-color: white;
+    border: 1px solid var(--text-gray);
+    border-radius: 1.5vw;
+    padding: 0.4vw 1.5vw;
+}
+
+.item > .text-box > .right-box > .d-day-box > span {
+    color: var(--text-gray);
+}
