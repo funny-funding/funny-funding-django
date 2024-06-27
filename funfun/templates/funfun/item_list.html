@@ -10,14 +10,14 @@
         </div>
         <div class="category-container">
             <ul>
-                <li>IT</li>
-                <li>건강</li>
-                <li>음식</li>
-                <li>엔터테이먼트</li>
-                <li>사회</li>
-                <li>디자인 및 패션</li>
-                <li>농업</li>
-                <li>기타</li>
+                <li onclick="selectCategory(this);">IT</li>
+                <li onclick="selectCategory(this);">건강</li>
+                <li onclick="selectCategory(this);">음식</li>
+                <li onclick="selectCategory(this);">엔터테인먼트</li>
+                <li onclick="selectCategory(this);">사회</li>
+                <li onclick="selectCategory(this);">디자인 및 패션</li>
+                <li onclick="selectCategory(this);">농업</li>
+                <li onclick="selectCategory(this);">기타</li>
             </ul>
         </div>
         <div class="items-container">
@@ -107,4 +107,5 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'funfun/js/item_list.js' %}"></script>
 {% endblock %}
