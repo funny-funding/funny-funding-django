@@ -1,0 +1,219 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header-container {
+    width: 100%;
+    height: 10vh;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    z-index: 1000;
+}
+
+.header-logo {
+    display: inline-block;
+    margin-left: 15.42vw;
+}
+
+.header-logo-img {
+    width: auto;
+    height: auto;
+    max-width: 80%;
+    max-height: 80%;
+    cursor: pointer;
+}
+
+.header-nav {
+    display: inline-block;
+    margin-left: 45.05vw;
+}
+
+.header-nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+}
+
+.header-nav ul li {
+    padding-right: 3.02vw;
+    font-size: 0.85vw;
+    cursor: pointer;
+}
+
+.header-nav ul a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.search-container {
+    position: fixed;
+    top: 13vh; /* header-container 아래 */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 999;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*border-bottom: 1px solid #ccc;*/
+}
+
+.search-container > input {
+    width: 60vw;
+    height: 6vh;
+    padding-left: 1.5vw;
+    padding-right: 4vw;
+    border-radius: 50vh;
+    outline: none;
+    border: 1px solid var(--main-color);
+}
+
+.search-container > i {
+    position: relative;
+    left: -3vw;
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+.category-container {
+    position: fixed;
+    top: 21vh; /* search-container 아래 */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 998;
+    padding: 3vh 0;
+    text-align: center;
+    /*border-bottom: 1px solid #ccc;*/
+}
+
+.category-container > ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0;
+}
+
+.category-container > ul > li {
+    display: inline-block;
+    background-color: var(--main-color);
+    border-radius: 5vw;
+    padding: 0.5vw 2vw;
+    color: white;
+    font-size: 0.8vw;
+    margin: 0 0.2vw;
+    cursor: pointer;
+}
+
+.container {
+    margin-top: 25vh; /* header-container, search-container, category-container 높이 합보다 약간 크게 설정 */
+}
+
+.items-container {
+    position: relative;
+    padding-top: 15vh;
+    padding-bottom: 3vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    text-align: left;
+}
+
+.items-container > .item {
+    position: relative;
+    background-color: white;
+    width: 25vw;
+    height: 35vh;
+    border-radius: 1vw;
+    display: inline-block;
+    margin: 0 0.5vw 6vh 0;
+    box-shadow: 0px 0px 10px 1px rgb(200, 200, 200);
+    cursor: pointer;
+}
+
+.items-container > .item > .img-box {
+    height: 47%;
+    display: grid;
+    place-items: center;
+}
+
+.items-container > .item > .text-box {
+    height: 41%;
+    padding: 4%;
+}
+
+.items-container > .item > .text-box > .left-box {
+    width: 50%;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    text-align: left;
+    font-weight: 600;
+}
+
+.items-container > .item > .text-box > .right-box {
+    width: 50%;
+    height: 100%;
+    float: right;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.title,
+.funding-money {
+    font-size: 1.1vw;
+}
+
+.funding-money {
+    position: relative;
+    top: 1vh;
+    color: var(--main-light-color);
+}
+
+.using-box {
+    position: absolute;
+    bottom: 4%;
+}
+
+.using-box > span {
+    font-size: 0.8vw;
+    color: var(--text-gray);
+    font-weight: 400;
+}
+
+.using-box > span > i {
+    color: var(--text-gray);
+}
+
+.items-container > .item > .text-box > .right-box > .percent,
+.items-container > .item > .text-box > .right-box > .percent-text {
+    position: relative;
+    top: 1vh;
+    color: var(--main-color);
+    font-size: 2.2vw;
+    font-weight: 700;
+}
+
+.items-container > .item > .text-box > .right-box > .d-day-box {
+    position: absolute;
+    bottom: 4%;
+    right: 4%;
+    background-color: white;
+    border: 1px solid var(--text-gray);
+    border-radius: 1.5vw;
+    padding: 0.4vw 1.5vw;
+}
+
+.items-container > .item > .text-box > .right-box > .d-day-box > span {
+    color: var(--text-gray);
+}
