@@ -107,13 +107,28 @@ body {
 
 .category-container > ul > li {
     display: inline-block;
-    background-color: var(--main-color);
+    background-color: white;
+    border: 1px solid var(--main-color);
     border-radius: 5vw;
     padding: 0.5vw 2vw;
-    color: white;
+    color: var(--main-color);
     font-size: 0.8vw;
     margin: 0 0.2vw;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.category-container > ul > li:hover {
+    background-color: var(--main-light-color);
+    /*background-color: var(--main-light-color);*/
+    color: white;
+    border: none;
+}
+
+.category-container ul li.selected-category {
+    background-color: var(--main-color);
+    color: white;
+    border: none;
 }
 
 .container {
