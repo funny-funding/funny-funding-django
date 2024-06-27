@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'funfun/css/all.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'funfun/css/login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'funfun/css/join.css' %}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+
