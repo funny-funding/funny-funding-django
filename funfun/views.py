@@ -41,11 +41,23 @@ from .models import Item
 class ItemListView(ListView):
     model = Item
 
-class ItemCreateView(CreateView):
-    model = Item
-    fields = '__all__'
-    template_name_suffix = '_create'
-    success_url = reverse_lazy('funfun:item_list')
+@login_required
+def ItemCreateView(request):
+    if request.method == 'POST':
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.user = request.user
+            item.target_num = 0
+            print(f"User: {request.user}")
+            print(f"Item: {item}")
+            item.save()
+            return redirect('funfun:item_list')
+
+    else:
+        form = ItemForm()
+    context = {'form': form}
+    return render(request, 'funfun/item_create.html', context)
 
 class ItemUpdateView(UpdateView):
     model = Item
