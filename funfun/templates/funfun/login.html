@@ -3,39 +3,29 @@
 
 {% block content %}
     <div class="container">
-
         <img src="{% static 'funfun/images/logo.svg' %}" alt="Logo" class="header-logo-img">
-        <form method="post">
+        <form method="post" action="{% url 'funfun:login' %}">
             {% csrf_token %}
             <div>
-                <input type="email" name="email" maxlength="254" required id="id_email">
-                {% if form.email.errors %}
-                    <div>
-                        {% for error in form.email.errors %}
-                            <p style="color: red;">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+                <label for="username">사용자ID</label>
+                <input type="text" class="form-control" name="username" id="username"
+                       value="{{ form.username.value|default_if_none:'' }}">
             </div>
             <div>
-                <input type="password" name="password" required id="id_password">
-                {% if form.password.errors %}
-                    <div>
-                        {% for error in form.password.errors %}
-                            <p style="color: red;">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+                <label for="password">비밀번호</label>
+                <input type="password" class="form-control" name="password" id="password"
+                       value="{{ form.password.value|default_if_none:'' }}">
             </div>
-            {% if form.non_field_errors %}
-                <div>
-                    {% for error in form.non_field_errors %}
-                        <p style="color: red;">{{ error }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
+{#            {% if form.non_field_errors %}#}
+{#                <div>#}
+{#                    {% for error in form.non_field_errors %}#}
+{#                        <p style="color: red;">{{ error }}</p>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            {% endif %}#}
             <button type="submit">Login</button>
         </form>
-        <p><a href="{% url 'funfun:join' %}" id="join">계정이 없으신가요?</a></p>
+
+        <p><a href="{% url 'funfun:signup' %}" id="join">계정이 없으신가요?</a></p>
     </div>
 {% endblock %}
