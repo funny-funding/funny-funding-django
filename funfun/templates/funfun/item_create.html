@@ -1,11 +1,54 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Item Create{% endblock %}
 
+{% block css %}
+<link rel="stylesheet"  href="{% static 'funfun/css/create.css' %}">
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'funfun/js/create.js' %}"></script>
+{% endblock %}
+
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Create">
-    </form>
+    <div class="create-container">
+        <h1 class="create-title">자신만의 독특한 아이디어를 등록해보세요!</h1>
+        <div class="create-input-data">
+            <div class="create-input">
+                <p class="create-subtitle">회사명</p>
+                <input type="text" class="create-input-text" placeholder="회사명을 입력하세요">
+            </div>
+            <div class="create-input">
+                <p class="create-subtitle">아이템 명</p>
+                <input type="text" class="create-input-text" placeholder="아이템 명을 입력하세요">
+            </div>
+            <div class="create-input">
+                <p class="create-subtitle">아이템 설명</p>
+                <textarea class="create-input-textarea" placeholder="아이템 명을 입력하세요"></textarea>
+            </div>
+            <div class="create-input">
+                <p class="create-subtitle">투자 목표 금액</p>
+                <input type="text" class="create-input-text" placeholder="투자 목표 금액을 입력하세요">
+            </div>
+            <div class="create-input">
+                <p class="create-subtitle">투자 기간</p>
+                <input type="text" class="create-input-text" placeholder="투자 받을 기간을 입력하세요">
+            </div>
+            <div class="create-input">
+                <p class="create-subtitle">이미지 등록</p>
+                <div class="create-image" id="image-upload  ">
+                    <img src="{% static 'funfun/images/photo-icon.svg' %}">
+                    <p>이미지 선택</p>
+                    <input type="file" id="image-input" >
+                </div>
+                <div id="image-preview" class="image-preview">
+
+                </div>
+            </div>
+        </div>
+        <div class="create-submit">
+            등록하기
+        </div>
+    </div>
 {% endblock %}
