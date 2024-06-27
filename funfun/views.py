@@ -70,3 +70,10 @@ def signup(request):
     else:
         form = UserForm()
     return render(request, 'funfun/signup.html', {'form': form})
+
+
+class MypageView(View):
+    template_name = 'funfun/mypage.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
