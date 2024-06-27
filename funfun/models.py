@@ -1,16 +1,20 @@
+from django.contrib.auth.models import AbstractUser, User
 from django.db import models
 
 # Create your models here.
 
-class User(models.Model):
-    email = models.CharField(max_length=20)
-    password = models.CharField(max_length=20)
-    nickname = models.CharField(max_length=20)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return f'{self.email} {self.password} {self.nickname} {self.created_at} {self.updated_at}'
+# class Profile(AbstractUser):
+#     pass
+# class User(models.Model):
+#     email = models.CharField(max_length=20)
+#     password = models.CharField(max_length=20)
+#     nickname = models.CharField(max_length=20)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#
+#     def __str__(self):
+#         return f'{self.email} {self.password} {self.nickname} {self.created_at} {self.updated_at}'
 
 
 class Item(models.Model):

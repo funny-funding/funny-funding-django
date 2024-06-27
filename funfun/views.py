@@ -1,47 +1,43 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.contrib.auth import login, authenticate
 from django.views import View
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
-from funfun.forms import LoginForm, CustomUserCreationForm
-from funfun.models import Item, User
+from .forms import UserForm
+from .models import Item
 
-from django.contrib.auth.views import LoginView as AuthLoginView
-from django.contrib.auth.forms import UserCreationForm
+# class SignUpView(CreateView):
+#     form_class = CustomUserCreationForm
+#     template_name = 'funfun/signup.html'
+#     success_url = reverse_lazy('funfun:item_list')
+#
+#     def form_valid(self, form):
+#         user = form.save()
+#         login(self.request, user)
+#         return redirect(self.success_url)
 
-from django.contrib.auth import login
-
-class LoginView(View):
-    template_name = 'funfun/login.html'
-
-    def get(self, request):
-        form = LoginForm()
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request):
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            user = User.objects.filter(email=email).first()
-            if user and user.password == password:
-                login(request, user)
-                return redirect('funfun:item_list')
-            else:
-                form.add_error(None, 'Invalid email or password')
-        return render(request, self.template_name, {'form': form})
-
-class JoinView(CreateView):
-    form_class = CustomUserCreationForm
-    template_name = 'funfun/join.html'
-    success_url = reverse_lazy('funfun:login')
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        user = form.save()
-        login(self.request, user)
-        return response
-
+# class LoginView(View):
+#     form_class = CustomUserCreationForm
+#     template_name = 'funfun/login.html'
+#
+#     def get(self, request):
+#         form = self.form_class()
+#         return render(request, self.template_name, {'form': form})
+#
+#     def post(self, request):
+#         form = self.form_class(data=request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data['username']
+#             password = form.cleaned_data['password']
+#             user = authenticate(request, username=username, password=password)
+#             if user is not None:
+#                 login(request, user)
+#                 return redirect('funfun:item_list')
+#             else:
+#                 form.add_error(None, '이메일 또는 비밀번호가 유효하지 않습니다.')
+#         return render(request, self.template_name, {'form': form})
+#
 class ItemListView(ListView):
     model = Item
 
@@ -60,3 +56,17 @@ class ItemUpdateView(UpdateView):
 class ItemDeleteView(DeleteView):
     model = Item
     success_url = reverse_lazy('funfun:item_list')
+
+def signup(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)  # 사용자 인증
+            login(request, user)  # 로그인
+            return redirect('index')
+    else:
+        form = UserForm()
+    return render(request, 'funfun/signup.html', {'form': form})
