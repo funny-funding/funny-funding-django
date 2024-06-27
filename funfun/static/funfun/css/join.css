@@ -1,0 +1,13 @@
+.input-container {
+    text-align: left;
+}
+
+label {
+    color: var(--main-color);
+    font-size: 0.8vw;
+}
+
+#login {
+    color: var(--text-gray);
+    font-size: 0.8vw;
+}
