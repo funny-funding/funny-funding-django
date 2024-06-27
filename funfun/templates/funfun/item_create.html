@@ -14,35 +14,36 @@
             <div class="create-input">
                 <p class="create-subtitle">회사명</p>
                 <input type="text" class="create-input-text" placeholder="회사명을 입력하세요">
+                {{ form.company.errors }}
             </div>
             <div class="create-input">
                 <p class="create-subtitle">아이템 명</p>
                 <input type="text" class="create-input-text" placeholder="아이템 명을 입력하세요">
+                {{ form.name.errors }}
             </div>
             <div class="create-input">
                 <p class="create-subtitle">아이템 설명</p>
-                <textarea class="create-input-textarea" placeholder="아이템 명을 입력하세요"></textarea>
+                <textarea class="create-input-textarea" placeholder="아이템 설명을 입력하세요"></textarea>
+                {{ form.description.errors }}
             </div>
             <div class="create-input">
                 <p class="create-subtitle">아이템 카테고리</p>
-                <select class="create-input-text">
-                    <option value="IT">IT</option>
-                    <option value="건강">건강</option>
-                    <option value="음식">음식</option>
-                    <option value="엔터테이먼트">엔터테이먼트</option>
-                    <option value="사회">사회</option>
-                    <option value="디자인 및 패션">디자인 및 패션</option>
-                    <option value="농업">농업</option>
-                    <option value="기타">기타</option>
+                <select name="type" class="create-input-text">
+                    {% for value, display in form.type.field.choices %}
+                        <option value="{{ value }}" {% if form.type.value == value %}selected{% endif %}>{{ display }}</option>
+                    {% endfor %}
                 </select>
+                {{ form.type.errors }}
             </div>
             <div class="create-input">
                 <p class="create-subtitle">투자 목표 금액</p>
                 <input type="text" class="create-input-text" placeholder="투자 목표 금액을 입력하세요">
+                {{ form.price.errors }}
             </div>
             <div class="create-input">
                 <p class="create-subtitle">투자 기간</p>
                 <input type="text" class="create-input-text" placeholder="투자 받을 기간을 입력하세요">
+                {{ form.end_period.errors }}
             </div>
             <div class="create-input" id="create-input">
                 <p class="create-subtitle">이미지 등록</p>
