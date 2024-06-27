@@ -5,11 +5,26 @@
     font-style: normal;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     text-decoration: none;
     list-style: none;
     font-family: 'Pretendard-Regular', serif;
     color: #000;
+}
+
+:root {
+    --main-color: #3F78E7;
+    --input-gray: #D2D2D2;
+    --text-gray: #A7A7A7;
+}
+
+
+input {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
 }
