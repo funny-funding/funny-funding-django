@@ -41,6 +41,12 @@ from .models import Item
 #
 class ItemListView(ListView):
     model = Item
+    template_name = 'funfun/item_list.html'
+    context_object_name = 'items'
+
+    def get_queryset(self):
+        # 현재 로그인한 사용자만의 아이템을 반환합니다.
+        return Item.objects.filter(user=self.request.user)
 
 @login_required
 def ItemCreateView(request):
