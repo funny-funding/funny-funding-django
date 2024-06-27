@@ -1,10 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.views import View
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
-from .forms import UserForm
+from .forms import UserForm, ItemForm
 from .models import Item
 
 # class SignUpView(CreateView):
