@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}Item Detail{% endblock %}
+{% block content %}
+    <div class="detail-container">
+        <div class="item-container">
+            <div class="top-box">
+                <div class="category">{{ item.get_type_display }}</div>
+                <div class="company">{{ item.company }}</div>
+                <div class="name">{{ item.name }}</div>
+            </div>
+            <div class="content-container">
+                <div class="image-box">
+                    <img src="{{ item.image.url }}" alt="Item Image" class="header-logo-img">
+                </div>
+                <div class="text-box">
+                    <span class="success-money">{{ item.price }}</span><span class="content-text"> 원 펀딩에 성공했어요</span>
+                    <br>
+                    <span class="gray-text">목표 금액  </span><span
+                        class="gray-text goal-money"> {{ item.target_num }}</span><span class="gray-text"> 원</span> <br>
+                    <div class="margin-box"></div>
+                    <div class="margin-box"></div>
+                    <span class="blue-text">{{ item.target_num }}</span><span class="content-text"> % 목표를 달성했어요</span>
+                    <br>
+                    <div class="margin-box"></div>
+                    <span class="blue-text">{{ item.target_num }}</span><span class="content-text"> 명의 투자자가 함께해요</span>
+                    <br>
+                    <div class="margin-box"></div>
+                    <span class="content-text">펀딩 종료까지 </span><span class="blue-text">D-</span><span
+                        class="blue-text d-day">{{ item.end_period|date:"Y.m.d" }}</span><span class="content-text"> 남았어요</span>
+                    <br>
+                    <span class="gray-text">종료 일자 </span><span
+                        class="gray-text last-date">{{ item.end_period|date:"Y. m. d." }}</span> <br>
+                    <div class="margin-box"></div>
+                    <div class="margin-box"></div>
+                    <div class="margin-box"></div>
+                    <button>펀딩에 참여하기</button>
+                </div>
+            </div>
+            <div class="content">{{ item.description }}</div>
+        </div>
+        <div class="comment-container">
+            <div class="add-comment">
+                <form method="post" action="{% url 'funfun:add_comment' item.pk %}">
+                    {% csrf_token %}
+                    <input type="text" name="content" class="comment-input" placeholder="제품에 대한 피드백을 남겨주세요!">
+                    <button type="submit" class="comment-btn">댓글쓰기</button>
+                </form>
+            </div>
+            <div class="comments">
+                {% for comment in comments %}
+                    <div class="comment-box">
+                        <div class="name">{{ comment.user.username }}</div>
+                        <div class="comment">
+                            <span class="content">{{ comment.content }}</span>
+                            <div class="btns">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                                <i class="fa-regular fa-trash-can"></i>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'funfun/js/item_detail.js' %}"></script>
+{% endblock %}
