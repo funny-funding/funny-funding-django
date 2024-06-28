@@ -46,12 +46,16 @@
                                 수정
                             </div>
                         </a>
-                        <div class="mypage-delete">
-                            삭제
-                        </div>
+                        <form id="delete-form-{{ item.pk }}" method="POST"
+                              action="{% url 'funfun:item_delete' item.pk %}">
+                            {% csrf_token %}
+                            <button type="button" class="mypage-delete" onclick="confirmDelete({{ item.pk }})"> 삭제
+                            </button>
+                        </form>
                     </div>
                 {% endfor %}
             </div>
         </div>
     </div>
+    <script src="{% static 'funfun/js/mypage.js' %}"></script>
 {% endblock %}

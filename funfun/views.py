@@ -75,7 +75,10 @@ class ItemUpdateView(UpdateView):
 
 class ItemDeleteView(DeleteView):
     model = Item
-    success_url = reverse_lazy('funfun:item_list')
+    success_url = reverse_lazy('funfun:mypage')
+
+    def get_queryset(self):
+        return Item.objects.filter(user=self.request.user)
 
 def signup(request):
     if request.method == 'POST':
