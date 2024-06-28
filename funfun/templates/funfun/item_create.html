@@ -4,61 +4,61 @@
 {% block title %}Item Create{% endblock %}
 
 {% block css %}
-<link rel="stylesheet"  href="{% static 'funfun/css/create.css' %}">
+<link rel="stylesheet" href="{% static 'funfun/css/create.css' %}">
 {% endblock %}
 
 {% block content %}
     <div class="create-container">
         <h1 class="create-title">자신만의 독특한 아이디어를 등록해보세요!</h1>
-        <div class="create-input-data">
-            <div class="create-input">
-                <p class="create-subtitle">회사명</p>
-                <input type="text" class="create-input-text" placeholder="회사명을 입력하세요">
-                {{ form.company.errors }}
-            </div>
-            <div class="create-input">
-                <p class="create-subtitle">아이템 명</p>
-                <input type="text" class="create-input-text" placeholder="아이템 명을 입력하세요">
-                {{ form.name.errors }}
-            </div>
-            <div class="create-input">
-                <p class="create-subtitle">아이템 설명</p>
-                <textarea class="create-input-textarea" placeholder="아이템 설명을 입력하세요"></textarea>
-                {{ form.description.errors }}
-            </div>
-            <div class="create-input">
-                <p class="create-subtitle">아이템 카테고리</p>
-                <select name="type" class="create-input-text">
-                    {% for value, display in form.type.field.choices %}
-                        <option value="{{ value }}" {% if form.type.value == value %}selected{% endif %}>{{ display }}</option>
-                    {% endfor %}
-                </select>
-                {{ form.type.errors }}
-            </div>
-            <div class="create-input">
-                <p class="create-subtitle">투자 목표 금액</p>
-                <input type="text" class="create-input-text" placeholder="투자 목표 금액을 입력하세요">
-                {{ form.price.errors }}
-            </div>
-            <div class="create-input">
-                <p class="create-subtitle">투자 기간</p>
-                <input type="date" class="create-input-text" placeholder="투자 받을 기간을 입력하세요">
-                {{ form.end_period.errors }}
-            </div>
-            <div class="create-input" id="create-input">
-                <p class="create-subtitle">이미지 등록</p>
-                <div class="create-image" id="image-upload  ">
-                    <img src="{% static 'funfun/images/photo-icon.svg' %}">
-                    <p>이미지 선택</p>
-                    <input type="file" id="image-input" >
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="create-input-data">
+                <div class="create-input">
+                    <p class="create-subtitle">회사명</p>
+                    <input type="text" name="company" class="create-input-text" placeholder="회사명을 입력하세요">
+                    {{ form.company.errors }}
                 </div>
+                <div class="create-input">
+                    <p class="create-subtitle">아이템 명</p>
+                    <input type="text" name="name" class="create-input-text" placeholder="아이템 명을 입력하세요">
+                    {{ form.name.errors }}
+                </div>
+                <div class="create-input">
+                    <p class="create-subtitle">아이템 설명</p>
+                    <textarea name="description" class="create-input-textarea" placeholder="아이템 설명을 입력하세요"></textarea>
+                    {{ form.description.errors }}
+                </div>
+                <div class="create-input">
+                    <p class="create-subtitle">아이템 카테고리</p>
+                    <select name="type" class="create-input-text">
+                        {% for value, display in form.type.field.choices %}
+                            <option value="{{ value }}" {% if form.type.value == value %}selected{% endif %}>{{ display }}</option>
+                        {% endfor %}
+                    </select>
+                    {{ form.type.errors }}
+                </div>
+                <div class="create-input">
+                    <p class="create-subtitle">투자 목표 금액</p>
+                    <input type="text" name="price" class="create-input-text" placeholder="투자 목표 금액을 입력하세요">
+                    {{ form.price.errors }}
+                </div>
+                <div class="create-input">
+                    <p class="create-subtitle">투자 기간</p>
+                    <input type="date" name="end_period" class="create-input-text" placeholder="투자 받을 기간을 입력하세요">
+                    {{ form.end_period.errors }}
+                </div>
+                <div class="create-input" id="create-input">
+                    <p class="create-subtitle">이미지 등록</p>
+                    <div class="create-image" id="image-upload">
+                        <img src="{% static 'funfun/images/photo-icon.svg' %}">
+                        <p>이미지 선택</p>
+                        <input type="file" name="image" id="image-input">
+                    </div>
+                </div>
+                <div id="image-preview" class="image-preview"></div>
             </div>
-            <div id="image-preview" class="image-preview"></div>
-        </div>
-        <div class="create-submit" id="create-submit">
-            등록하기
-        </div>
+            <button type="submit" class="create-submit" id="create-submit">등록하기</button>
+        </form>
     </div>
     <script src="{% static 'funfun/js/create.js' %}"></script>
 {% endblock %}
-

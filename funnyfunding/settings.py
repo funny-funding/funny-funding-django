@@ -138,3 +138,7 @@ AUTH_USER_MODEL = 'auth.User'
 
 # 로그인 성공후 이동하는 URL
 LOGIN_REDIRECT_URL = 'list/'
+
+# 이미지 설정 추가
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
