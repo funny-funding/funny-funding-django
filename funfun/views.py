@@ -1,4 +1,6 @@
+from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.utils.decorators import method_decorator
@@ -76,18 +78,16 @@ class ItemDeleteView(DeleteView):
     success_url = reverse_lazy('funfun:item_list')
 
 def signup(request):
-    if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)  # 사용자 인증
-            login(request, user)  # 로그인
-            return redirect('index')
-    else:
-        form = UserForm()
-    return render(request, 'funfun/signup.html', {'form': form})
+    if request.method == 'POST':
+        if request.POST['password1'] == request.POST['password2']:
+            user = User.objects.create_user(
+                                            username=request.POST['username'],
+                                            password=request.POST['password1'],
+                                            email=request.POST['email'],)
+            auth.login(request, user)
+            return redirect('/funfun/list')
+        return render(request, 'funfun/signup.html')
+    return render(request, 'funfun/signup.html')
 
 @method_decorator(login_required, name='dispatch')  # 사용자 인증이 안 되어 있다면 로그인 페이지로 redirect 되는 데코레이터
 class MypageView(View):
