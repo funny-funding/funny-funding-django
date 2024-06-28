@@ -20,14 +20,15 @@
         <div class="mypage-product">
             <p class="mypage-product-title">나의 기발한 아이템들</p>
             <div class="mypage-product-content">
+                {% for item in user_items %}
                 <div class="item">
                     <div class="img-box">
-                        <img src="{% static 'funfun/images/logo.svg' %}" alt="Logo" class="header-logo-img">
+                        <img src="{{ item.image.url }}" alt={{ item.name }} class="header-logo-img">
                     </div>
                     <div class="text-box">
                         <div class="left-box">
-                            <span class="title">순한 썬크림</span> <br>
-                            <span class="money funding-money">50,000</span><span class="funding-money">원 펀딩</span>
+                            <span class="title">{{ item.name }}</span> <br>
+                            <span class="money funding-money">{{ item.price }}</span><span class="funding-money">원 펀딩</span>
                             <div class="using-box">
                                 <span><i class="fa-regular fa-comment"></i> 10</span> <span><i
                                     class="fa-regular fa-user"></i> 20</span>
@@ -41,6 +42,7 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>
