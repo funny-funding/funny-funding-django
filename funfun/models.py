@@ -39,7 +39,7 @@ class Item(models.Model):
     end_period = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', default='')
 
     def __str__(self):
         return f'{self.user} {self.name} {self.get_type_display()} {self.company} {self.description} {self.price} {self.target_num} {self.start_period} {self.end_period} {self.created_at} {self.updated_at}'

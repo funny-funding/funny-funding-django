@@ -10,7 +10,7 @@
 {% block content %}
     <div class="create-container">
         <h1 class="create-title">자신만의 독특한 아이디어를 등록해보세요!</h1>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="create-input-data">
                 <div class="create-input">
@@ -52,7 +52,7 @@
                     <div class="create-image" id="image-upload">
                         <img src="{% static 'funfun/images/photo-icon.svg' %}">
                         <p>이미지 선택</p>
-                        <input type="file" id="image-input">
+                        <input type="file" name="image" id="image-input">
                     </div>
                 </div>
                 <div id="image-preview" class="image-preview"></div>

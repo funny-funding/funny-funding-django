@@ -51,7 +51,7 @@ class ItemListView(ListView):
 @login_required
 def ItemCreateView(request):
     if request.method == 'POST':
-        form = ItemForm(request.POST)
+        form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
             item = form.save(commit=False)
             item.user = request.user
