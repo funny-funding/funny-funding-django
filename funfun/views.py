@@ -93,7 +93,10 @@ def signup(request):
 class MypageView(View):
     template_name = 'funfun/mypage.html'
     def get(self, request):
+        user_items = Item.objects.filter(user=request.user)
         context = {
             'username' : request.user.username,
+            'user_items': user_items,
         }
+        print(context.get('user_items'))
         return render(request, self.template_name, context)
