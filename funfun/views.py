@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
@@ -88,9 +89,11 @@ def signup(request):
         form = UserForm()
     return render(request, 'funfun/signup.html', {'form': form})
 
-
+@method_decorator(login_required, name='dispatch')  # 사용자 인증이 안 되어 있다면 로그인 페이지로 redirect 되는 데코레이터
 class MypageView(View):
     template_name = 'funfun/mypage.html'
-
     def get(self, request):
-        return render(request, self.template_name)
+        context = {
+            'username' : request.user.username,
+        }
+        return render(request, self.template_name, context)

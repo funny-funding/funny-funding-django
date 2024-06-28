@@ -4,13 +4,13 @@
 {% block title %}Mypage{% endblock %}
 
 {% block css %}
-<link rel="stylesheet"  href="{% static 'funfun/css/mypage.css' %}">
+    <link rel="stylesheet" href="{% static 'funfun/css/mypage.css' %}">
 {% endblock %}
 
 {% block content %}
     <div class="mypage-container">
         <div class="mypage-profile">
-            <h1 class="mypage-name">노하은</h1>
+            <h1 class="mypage-name">{{ username }}</h1>
             <div class="mypage-money">
                 <p class="mypage-money-title">나의 자금</p>
                 <h1 class="mypage-money-main">50,000원</h1>
@@ -18,25 +18,26 @@
             </div>
         </div>
         <div class="mypage-product">
-            <p class="mypage-product-title">내가 투자한 제품</p>
+            <p class="mypage-product-title">나의 기발한 아이템들</p>
             <div class="mypage-product-content">
                 <div class="item">
-                <div class="img-box">
-                    <img src="{% static 'funfun/images/logo.svg' %}" alt="Logo" class="header-logo-img">
-                </div>
-                <div class="text-box">
-                    <div class="left-box">
-                        <span class="title">순한 썬크림</span> <br>
-                        <span class="money funding-money">50,000</span><span class="funding-money">원 펀딩</span>
-                        <div class="using-box">
-                            <span><i class="fa-regular fa-comment"></i> 10</span> <span><i
-                                class="fa-regular fa-user"></i> 20</span>
-                        </div>
+                    <div class="img-box">
+                        <img src="{% static 'funfun/images/logo.svg' %}" alt="Logo" class="header-logo-img">
                     </div>
-                    <div class="right-box">
-                        <span class="percent">50</span><span class="percent-text">%</span>
-                        <div class="d-day-box">
-                            <span class="d-text">D-</span><span class="d-day">3</span>
+                    <div class="text-box">
+                        <div class="left-box">
+                            <span class="title">순한 썬크림</span> <br>
+                            <span class="money funding-money">50,000</span><span class="funding-money">원 펀딩</span>
+                            <div class="using-box">
+                                <span><i class="fa-regular fa-comment"></i> 10</span> <span><i
+                                    class="fa-regular fa-user"></i> 20</span>
+                            </div>
+                        </div>
+                        <div class="right-box">
+                            <span class="percent">50</span><span class="percent-text">%</span>
+                            <div class="d-day-box">
+                                <span class="d-text">D-</span><span class="d-day">3</span>
+                            </div>
                         </div>
                     </div>
                 </div>
