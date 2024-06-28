@@ -17,7 +17,3 @@ urlpatterns = [
     path('delete/<int:pk>', views.ItemDeleteView.as_view(), name='item_delete'),
     path('mypage/', views.MypageView.as_view(), name='mypage'),
 ]
-
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
