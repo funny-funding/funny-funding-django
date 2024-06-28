@@ -56,8 +56,6 @@ def ItemCreateView(request):
             item = form.save(commit=False)
             item.user = request.user
             item.target_num = 0
-            print(f"User: {request.user}")
-            print(f"Item: {item}")
             item.save()
             return redirect('funfun:item_list')
 

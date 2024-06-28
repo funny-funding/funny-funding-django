@@ -15,4 +15,4 @@ class UserForm(UserCreationForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['name', 'type', 'company', 'description', 'price', 'end_period']
+        fields = ("name", "type", "company", "description", "price", "end_period")
