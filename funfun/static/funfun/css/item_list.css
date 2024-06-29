@@ -105,7 +105,7 @@ body {
     margin: 0;
 }
 
-.category-container ul > a > li {
+.category-container ul  > li {
     display: inline-block;
     background-color: white;
     border: 1px solid var(--main-color);
@@ -118,14 +118,14 @@ body {
     color: var(--main-color);
 }
 
-.category-container > ul > a > li:hover {
+.category-container > ul > li:hover {
     background-color: var(--main-light-color);
     /*background-color: var(--main-light-color);*/
     border: 1px solid var(--main-light-color);
     color: white;
 }
 
-.category-container ul a li.selected-category {
+.category-container ul .selected-category {
     background-color: var(--main-color);
     border: none;
     color: white;
