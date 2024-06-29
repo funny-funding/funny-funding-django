@@ -55,12 +55,13 @@ body {
 
 .search-container {
     position: fixed;
-    top: 13vh; /* header-container 아래 */
+    top: 10vh; /* header-container 아래 */
     left: 0;
     width: 100%;
+    height: 10vh;
     background-color: white;
     z-index: 999;
-    padding: 10px 0;
+    padding: 3vh 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,6 +69,8 @@ body {
 }
 
 .search-container > input {
+    position: relative;
+    top: 3vh;
     width: 60vw;
     height: 6vh;
     padding-left: 1.5vw;
@@ -79,6 +82,7 @@ body {
 
 .search-container > i {
     position: relative;
+    top: 3vh;
     left: -3vw;
     color: var(--main-color);
     cursor: pointer;
@@ -86,7 +90,7 @@ body {
 
 .category-container {
     position: fixed;
-    top: 21vh; /* search-container 아래 */
+    top: 24vh; /* search-container 아래 */
     left: 0;
     width: 100%;
     background-color: white;
