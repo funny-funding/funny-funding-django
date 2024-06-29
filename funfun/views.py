@@ -12,39 +12,6 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView, D
 from .forms import UserForm, ItemForm
 from .models import Item, Comment
 
-
-
-# class SignUpView(CreateView):
-#     form_class = CustomUserCreationForm
-#     template_name = 'funfun/signup.html'
-#     success_url = reverse_lazy('funfun:item_list')
-#
-#     def form_valid(self, form):
-#         user = form.save()
-#         login(self.request, user)
-#         return redirect(self.success_url)
-
-# class LoginView(View):
-#     form_class = CustomUserCreationForm
-#     template_name = 'funfun/login.html'
-#
-#     def get(self, request):
-#         form = self.form_class()
-#         return render(request, self.template_name, {'form': form})
-#
-#     def post(self, request):
-#         form = self.form_class(data=request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password']
-#             user = authenticate(request, username=username, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect('funfun:item_list')
-#             else:
-#                 form.add_error(None, '이메일 또는 비밀번호가 유효하지 않습니다.')
-#         return render(request, self.template_name, {'form': form})
-#
 def ItemListView(request):
     category = request.GET.get('category', '')
     search = request.GET.get('search', '')
