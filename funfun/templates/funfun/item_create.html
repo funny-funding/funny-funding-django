@@ -30,7 +30,7 @@
                 </div>
                 <div class="create-input">
                     <p class="create-subtitle">아이템 카테고리</p>
-                    <select name="type" class="create-input-text">
+                    <select name="type" class="create-input-select">
                         {% for value, display in form.type.field.choices %}
                             <option value="{{ value }}" {% if form.type.value == value %}selected{% endif %}>{{ display }}</option>
                         {% endfor %}
