@@ -117,6 +117,7 @@
     border: 1px solid #d2d2d2;
     border-radius: 5px;
     margin-top: 3.24vh;
+    box-shadow: 0px 4px 20px 2px rgb(0,0,0,0.15);
 }
 
 .create-submit{
