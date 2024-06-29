@@ -26,10 +26,10 @@
                 <input type="text" class="form-control" name="email" id="email"
                        value="{{ form.email.value|default_if_none:'' }}">
             </div>
-            {% if form.non_field_errors %}
+            {% if messages %}
                 <div>
-                    {% for error in form.non_field_errors %}
-                        <p style="color: red;">{{ error }}</p>
+                    {% for message in messages %}
+                        <p style="color: red;">{{ message }}</p>
                     {% endfor %}
                 </div>
             {% endif %}

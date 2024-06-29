@@ -12,6 +12,16 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView, D
 from .forms import UserForm, ItemForm
 from .models import Item, Comment, Investment, Profile
 
+from django.contrib.auth.views import LoginView
+from django.contrib.messages.views import SuccessMessageMixin
+
+class CustomLoginView(SuccessMessageMixin, LoginView):
+    template_name = 'funfun/login.html'
+    success_message = "로그인 성공"
+
+    def form_invalid(self, form):
+        messages.error(self.request, "로그인 실패")
+        return super().form_invalid(form)
 
 def ItemListView(request):
     category = request.GET.get('category', '')
@@ -124,15 +134,18 @@ class ItemDeleteView(DeleteView):
 
 def signup(request):
     if request.method == 'POST':
-        if request.POST['password1'] == request.POST['password2']:
-            user = User.objects.create_user(
-                username=request.POST['username'],
-                password=request.POST['password1'],
-                email=request.POST['email'], )
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
             auth.login(request, user)
-            return redirect('/funfun/list')
-        return render(request, 'funfun/signup.html')
-    return render(request, 'funfun/signup.html')
+            messages.success(request, '회원가입 성공')
+            return redirect('funfun:list')
+        else:
+            messages.error(request, '회원가입 실패')
+    else:
+        form = UserForm()
+    return render(request, 'funfun/signup.html', {'form': form})
+
 
 
 @method_decorator(login_required, name='dispatch')  # 사용자 인증이 안 되어 있다면 로그인 페이지로 redirect 되는 데코레이터
@@ -199,3 +212,4 @@ def delete_comment(request, pk):
         comment.delete()
         messages.success(request, '댓글이 삭제되었습니다.')
     return redirect('funfun:item_detail', pk=comment.item.pk)
+
