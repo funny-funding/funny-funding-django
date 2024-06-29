@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateUrlParams = (searchValue) => {
         let currentUrl = "http://localhost:8000/funfun/list";
 
-        if (searchValue && currentCategory) {
+        if (currentCategory) {
             currentUrl += `?category=${currentCategory}&search=${searchValue}`;  // 카테고리와 검색어가 모두 있는 URL로 업데이트
         } else if (currentCategory) {
             currentUrl += `?category=${currentCategory}`;  // 카테고리만 있는 URL로 업데이트
