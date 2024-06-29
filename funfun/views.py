@@ -1,4 +1,4 @@
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
@@ -119,3 +119,26 @@ def add_comment(request, pk):
         if content:
             Comment.objects.create(user=request.user, item=item, content=content)
     return redirect('funfun:item_detail', pk=pk)
+
+@login_required
+def edit_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.user != comment.user:
+        return redirect('funfun:item_detail', pk=comment.item.pk)
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        if content:
+            comment.content = content
+            comment.save()
+            messages.success(request, '댓글이 수정되었습니다.')
+            return redirect('funfun:item_detail', pk=comment.item.pk)
+    context = {'comment': comment}
+    return render(request, 'funfun/item_detail.html', context)
+
+@login_required
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.user == comment.user:
+        comment.delete()
+        messages.success(request, '댓글이 삭제되었습니다.')
+    return redirect('funfun:item_detail', pk=comment.item.pk)

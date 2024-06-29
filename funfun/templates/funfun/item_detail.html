@@ -55,13 +55,25 @@
                         <div class="comment">
                             <span class="content">{{ comment.content }}</span>
                             <div class="btns">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                                <i class="fa-regular fa-trash-can"></i>
+                                {% if request.user == comment.user %}
+                                    <i class="fa-regular fa-pen-to-square" onclick="openEditPopup({{ comment.pk }}, '{{ comment.content }}')"></i>
+                                    <a href="{% url 'funfun:delete_comment' comment.pk %}"><i class="fa-regular fa-trash-can"></i></a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
+        </div>
+    </div>
+    <div id="edit-comment-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeEditPopup()">&times;</span>
+            <form id="edit-comment-form" method="post" action="">
+                {% csrf_token %}
+                <textarea name="content" id="edit-comment-content" rows="4"></textarea>
+                <button type="submit">수정하기</button>
+            </form>
         </div>
     </div>
     <script src="{% static 'funfun/js/item_detail.js' %}"></script>

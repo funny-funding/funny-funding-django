@@ -1,14 +1,10 @@
-from django.conf import settings
-from django.conf.urls.static import static
 from django.urls import path
-
-from funfun import views
 from django.contrib.auth import views as auth_views
+from . import views
 
 app_name = 'funfun'
 
 urlpatterns = [
-    # path('', views.LoginView.as_view(), name='login'),
     path('', auth_views.LoginView.as_view(template_name='funfun/login.html'), name='login'),
     path('signup/', views.signup, name='signup'),
     path('list/', views.ItemListView.as_view(), name='item_list'),
@@ -18,4 +14,6 @@ urlpatterns = [
     path('mypage/', views.MypageView.as_view(), name='mypage'),
     path('detail/<int:pk>/', views.ItemDetailView.as_view(), name='item_detail'),
     path('detail/<int:pk>/add_comment/', views.add_comment, name='add_comment'),
+    path('edit_comment/<int:pk>/', views.edit_comment, name='edit_comment'),
+    path('delete_comment/<int:pk>/', views.delete_comment, name='delete_comment'),
 ]
