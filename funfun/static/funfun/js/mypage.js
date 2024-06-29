@@ -1,9 +1,3 @@
-const confirmDelete = (itemId) => {
-    if (confirm("정말로 삭제하시겠습니까?")) {
-        document.getElementById('delete-form-' + itemId).submit();
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.item').forEach(function (itemElement) {
         let endDateString = itemElement.getAttribute('data-end-period');

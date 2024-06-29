@@ -50,11 +50,9 @@
                                 수정
                             </div>
                         </a>
-                        <form id="delete-form-{{ item.pk }}" method="POST"
-                              action="{% url 'funfun:item_delete' item.pk %}">
+                         <form id="delete-form-{{ item.pk }}" method="POST" action="{% url 'funfun:item_delete' item.pk %}">
                             {% csrf_token %}
-                            <button type="button" class="mypage-delete" onclick="confirmDelete({{ item.pk }})"> 삭제
-                            </button>
+                            <button type="submit" class="mypage-delete" onclick="confirmDelete({{ item.pk }})"> 삭제 </button>
                         </form>
                     </div>
                 {% endfor %}
