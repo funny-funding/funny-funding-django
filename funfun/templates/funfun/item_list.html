@@ -5,8 +5,8 @@
 {% block content %}
     <div class="container">
         <div class="search-container">
-            <input type="text" name="search" placeholder="Search">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" name="search" id="search-input" placeholder="Search" value="{{ request.GET.search }}">
+            <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
         </div>
         <div class="category-container">
             <ul>

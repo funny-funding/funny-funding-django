@@ -34,3 +34,27 @@ function executeSelectCategoryOnLoad() {
 }
 
 window.onload = executeSelectCategoryOnLoad;
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchIcon = document.getElementById('search-icon');
+
+    searchIcon.addEventListener('click', () => {
+        performSearch();
+    });
+    const searchInput = document.getElementById('search-input');
+
+    searchInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            performSearch();
+        }
+    });
+    const performSearch = () => {
+        const searchValue = searchInput.value.trim();
+        console.log(searchValue)
+        if(searchValue){
+            let currentUrl =  "http://localhost:8000/funfun/list" + "?search=" + searchValue;
+            window.location.href = currentUrl;
+        }
+    }
+})

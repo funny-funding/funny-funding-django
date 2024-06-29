@@ -1,6 +1,7 @@
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.utils.decorators import method_decorator
@@ -46,6 +47,8 @@ from .models import Item, Comment
 #
 def ItemListView(request):
     category = request.GET.get('category', '')
+    search = request.GET.get('search', '')
+
     if category == '':
         items = Item.objects.all()
     else:
@@ -54,6 +57,10 @@ def ItemListView(request):
             items = Item.objects.filter(type=category)
         except ValueError:
             items = Item.objects.all()
+
+    if search:
+        items = items.filter(Q(name__icontains=search))
+
     context = {
         'items': items,
         'selected_category': category,
