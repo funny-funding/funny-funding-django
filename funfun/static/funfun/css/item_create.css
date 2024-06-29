@@ -1,0 +1,138 @@
+.create-container {
+    width: 100%;
+    position: fixed;
+    top: 13.88vh;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    height: calc(100vh - 13.88vh);
+}
+
+.create-title {
+    text-align: center;
+    color: #3F78E7;
+    font-size: 33px;
+    font-weight: 600;
+}
+
+.create-input-data{
+    margin-top: 6.9vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.create-input{
+    height: 9.9vh;
+    width: 46.3vw;
+    flex-basis: 46%;
+}
+
+.create-input:not(:first-child){
+    margin-top: 5.55vh;
+}
+
+.create-subtitle{
+    color: #85A8ED;
+    font-size: 25px;
+    text-align: left;
+}
+
+.create-input-text{
+    width: 100%;
+    margin-top: 1.38vh;
+    height: 62px;
+    border-radius: 6px;
+    border: 1px solid #D2D2D2;
+    padding-left: 25px;
+    font-size: 16px;
+}
+
+.create-input-text::placeholder{
+    color: #D2D2D2;
+}
+
+.create-input-textarea{
+    width: 97.5%;
+    margin-top: 1.38vh;
+    border-radius: 6px;
+    border: 1px solid #D2D2D2;
+    font-size: 16px;
+    height: 284px;
+    padding: 25px;
+    resize: none;
+}
+
+.create-input-textarea::placeholder{
+    color: #D2D2D2;
+}
+
+.create-image{
+    margin-top: 1.38vh;
+    width: 11.15vw;
+    height: 4.17vh;
+    background: #3F78E7;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.create-image img{
+    margin-left: 2.5vw;
+    z-index: 1;
+}
+
+.create-image p {
+    color: #fff;
+    font-size: 16px;
+    margin-left: 0.56vw;
+    z-index: 1;
+    font-weight: 300;
+}
+
+#image-input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.image-preview {
+    margin-top: 10px;
+    visibility: hidden;
+}
+
+.image-preview img {
+    max-width: 140px;
+    max-height: 140px;
+    border: 1px solid #d2d2d2;
+    border-radius: 5px;
+    margin-top: 3.24vh;
+}
+
+.create-submit{
+    text-align: center;
+    width: 48vw;
+    background: #3F78E7;
+    border-radius: 6px;
+    height: 5.51vh;
+    margin-top: 3.24vh;
+    margin-bottom: 10vh;
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 26.5%;
+    border: none;
+}

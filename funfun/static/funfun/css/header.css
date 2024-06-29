@@ -1,18 +1,18 @@
 .header-container {
     width: 100%;
     height: 10vh;
-    box-shadow: 0 0 20px 0 rgb(0,0,0,0.05);
+    box-shadow: 0 0 20px 0 rgb(0, 0, 0, 0.05);
     position: fixed;
     display: flex;
     align-items: center;
 }
 
-.header-logo{
+.header-logo {
     display: inline-block;
     margin-left: 15.42vw;
 }
 
-.header-logo-img{
+.header-logo-img {
     width: auto;
     height: auto;
     max-width: 80%;
@@ -20,19 +20,27 @@
     cursor: pointer;
 }
 
-.header-nav{
+.header-nav {
     display: inline-block;
     margin-left: 45.05vw;
 }
 
-.header-nav ul{
+.header-nav ul {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.header-nav ul li{
+.header-nav ul a li {
     padding-right: 3.02vw;
     font-size: 0.85vw;
     cursor: pointer;
+    color: #ABABAB;
+    font-weight: 200;
+}
+
+
+.header-nav ul li.active {
+    color: var(--main-color);
+    font-weight: 600;
 }
