@@ -10,14 +10,35 @@
         </div>
         <div class="category-container">
             <ul>
-                <li onclick="selectCategory(this);">IT</li>
-                <li onclick="selectCategory(this);">건강</li>
-                <li onclick="selectCategory(this);">음식</li>
-                <li onclick="selectCategory(this);">엔터테인먼트</li>
-                <li onclick="selectCategory(this);">사회</li>
-                <li onclick="selectCategory(this);">디자인 및 패션</li>
-                <li onclick="selectCategory(this);">농업</li>
-                <li onclick="selectCategory(this);">기타</li>
+                <a href="/funfun/list">
+                    <li class="selected-category" onclick="window.location.href='/funfun/list'">전체보기</li>
+                </a>
+                <a href="?category=0">
+                    <li data-category-id="0" onclick="selectCategory(this)">IT</li>
+                </a>
+                <a href="?category=1">
+                    <li data-category-id="1" onclick="selectCategory(this)">건강
+                    </li>
+                </a>
+                <a href="?category=2">
+                    <li data-category-id="2" onclick="selectCategory(this)">음식</li>
+                </a>
+                <a href="?category=3">
+                    <li data-category-id="3" onclick="selectCategory(this)">엔터테이먼트</li>
+                </a>
+                <a href="?category=4">
+                    <li data-category-id="4" onclick="selectCategory(this)">사회</li>
+                </a>
+                <a href="?category=5">
+                    <li data-category-id="5" onclick="selectCategory(this)">디자인 및 패션</li>
+                </a>
+                <a href="?category=6">
+                    <li data-category-id="6" onclick="selectCategory(this)">농업</li>
+                </a>
+                <a href="?category=7">
+                    <li data-category-id="7" onclick="selectCategory(this)">기타</li>
+                </a>
+
             </ul>
         </div>
         <div class="items-container">

@@ -12,6 +12,7 @@ from .forms import UserForm, ItemForm
 from .models import Item, Comment
 
 
+
 # class SignUpView(CreateView):
 #     form_class = CustomUserCreationForm
 #     template_name = 'funfun/signup.html'
@@ -43,10 +44,21 @@ from .models import Item, Comment
 #                 form.add_error(None, '이메일 또는 비밀번호가 유효하지 않습니다.')
 #         return render(request, self.template_name, {'form': form})
 #
-class ItemListView(ListView):
-    model = Item
-    template_name = 'funfun/item_list.html'
-    context_object_name = 'items'
+def ItemListView(request):
+    category = request.GET.get('category', '')
+    if category == '':
+        items = Item.objects.all()
+    else:
+        try:
+            category = int(category)
+            items = Item.objects.filter(type=category)
+        except ValueError:
+            items = Item.objects.all()
+    context = {
+        'items': items,
+        'selected_category': category,
+    }
+    return render(request, 'funfun/item_list.html', context)
 
 @login_required
 def ItemCreateView(request):
@@ -64,11 +76,13 @@ def ItemCreateView(request):
     context = {'form': form}
     return render(request, 'funfun/item_create.html', context)
 
+
 class ItemUpdateView(UpdateView):
     model = Item
     fields = '__all__'
     template_name_suffix = '_update'
     success_url = reverse_lazy('funfun:item_list')
+
 
 class ItemDeleteView(DeleteView):
     model = Item
@@ -77,25 +91,28 @@ class ItemDeleteView(DeleteView):
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
 
+
 def signup(request):
     if request.method == 'POST':
         if request.POST['password1'] == request.POST['password2']:
             user = User.objects.create_user(
-                                            username=request.POST['username'],
-                                            password=request.POST['password1'],
-                                            email=request.POST['email'],)
+                username=request.POST['username'],
+                password=request.POST['password1'],
+                email=request.POST['email'], )
             auth.login(request, user)
             return redirect('/funfun/list')
         return render(request, 'funfun/signup.html')
     return render(request, 'funfun/signup.html')
 
+
 @method_decorator(login_required, name='dispatch')  # 사용자 인증이 안 되어 있다면 로그인 페이지로 redirect 되는 데코레이터
 class MypageView(View):
     template_name = 'funfun/mypage.html'
+
     def get(self, request):
         user_items = Item.objects.filter(user=request.user)
         context = {
-            'username' : request.user.username,
+            'username': request.user.username,
             'user_items': user_items,
         }
         print(context.get('user_items'))

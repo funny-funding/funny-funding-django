@@ -7,7 +7,7 @@ app_name = 'funfun'
 urlpatterns = [
     path('', auth_views.LoginView.as_view(template_name='funfun/login.html'), name='login'),
     path('signup/', views.signup, name='signup'),
-    path('list/', views.ItemListView.as_view(), name='item_list'),
+    path('list/', views.ItemListView, name='item_list'),
     path('create/', views.ItemCreateView, name='item_create'),
     path('update/<int:pk>/', views.ItemUpdateView.as_view(), name='item_update'),
     path('delete/<int:pk>/', views.ItemDeleteView.as_view(), name='item_delete'),
