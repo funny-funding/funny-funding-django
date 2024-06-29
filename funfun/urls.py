@@ -16,4 +16,5 @@ urlpatterns = [
     path('detail/<int:pk>/add_comment/', views.add_comment, name='add_comment'),
     path('edit_comment/<int:pk>/', views.edit_comment, name='edit_comment'),
     path('delete_comment/<int:pk>/', views.delete_comment, name='delete_comment'),
+    path('add_funding/<int:item_id>/', views.add_funding, name='add_funding'),# funding 금액 제출
 ]

@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
 
 from .forms import UserForm, ItemForm
-from .models import Item, Comment
+from .models import Item, Comment, Investment
 
 
 
@@ -76,6 +76,29 @@ def ItemCreateView(request):
     context = {'form': form}
     return render(request, 'funfun/item_create.html', context)
 
+@login_required
+@login_required
+def add_funding(request, item_id):
+    if request.method == 'POST':
+        item = get_object_or_404(Item, id=item_id)
+        amount = int(request.POST.get('amount'))
+        item.current_price += amount
+        item.save()
+
+        # 사용자가 이미 투자한 내역이 있는지 확인
+        investment = Investment.objects.filter(user=request.user, item=item).first()
+        if investment:
+            investment.amount += amount
+            investment.save()
+        else:
+            Investment.objects.create(user=request.user, item=item, amount=amount)
+
+        # 투자자 수 업데이트
+        item.participant_num = Investment.objects.filter(item=item).count()
+        item.save()
+
+        return redirect('funfun:item_detail', pk=item_id)
+    return redirect('funfun:item_detail', pk=item_id)
 
 class ItemUpdateView(UpdateView):
     model = Item

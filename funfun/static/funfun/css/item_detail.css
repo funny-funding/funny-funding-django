@@ -149,7 +149,8 @@ body {
     font-weight: 500;
 }
 
-.item-container > .content-container > .text-box > .blue-text {
+.item-container > .content-container > .text-box > .blue-text,
+.item-container > .content-container > .text-box > .d-day-container > .blue-text{
     color: var(--main-color);
     font-size: 1.3vw;
     font-weight: 600;
