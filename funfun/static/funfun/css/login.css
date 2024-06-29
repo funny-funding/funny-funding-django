@@ -61,3 +61,11 @@ button {
 #login-container > form > div > label {
     font-weight: 600;
 }
+
+.error-message {
+    position: relative;
+    top: -3vh;
+    font-size: 0.8vw;
+    color: red;
+    margin-top: 0.5vh;
+}
