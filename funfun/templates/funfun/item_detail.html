@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load custom_filters %}
+
 {% block title %}Item Detail{% endblock %}
 {% block content %}
     <div class="detail-container">
@@ -15,27 +17,34 @@
                     <img src="{{ item.image.url }}" alt="Item Image" class="header-logo-img">
                 </div>
                 <div class="text-box">
-                    <span class="success-money">{{ item.price }}</span><span class="content-text"> 원 펀딩에 성공했어요</span>
+                    <span class="success-money">{{ item.current_price }}</span><span
+                        class="content-text"> 원 펀딩에 성공했어요</span>
                     <br>
-                    <span class="gray-text">목표 금액  </span><span
-                        class="gray-text goal-money"> {{ item.target_num }}</span><span class="gray-text"> 원</span> <br>
+                    <span class="gray-text">목표 금액 </span><span class="gray-text goal-money">{{ item.price }}</span><span
+                        class="gray-text"> 원</span> <br>
                     <div class="margin-box"></div>
                     <div class="margin-box"></div>
-                    <span class="blue-text">{{ item.target_num }}</span><span class="content-text"> % 목표를 달성했어요</span>
+                    <span class="blue-text current-percent">{{ item.current_price|div:item.price|mul:100|floatformat:2 }}</span><span
+                        class="content-text"> % 목표를 달성했어요</span>
                     <br>
                     <div class="margin-box"></div>
-                    <span class="blue-text">{{ item.target_num }}</span><span class="content-text"> 명의 투자자가 함께해요</span>
+                    <span class="blue-text">{{ item.participant_num }}</span><span
+                        class="content-text"> 명의 투자자가 함께해요</span>
                     <br>
                     <div class="margin-box"></div>
-                    <span class="content-text">펀딩 종료까지 </span><span class="blue-text">D-</span><span
-                        class="blue-text d-day">{{ item.end_period|date:"Y.m.d" }}</span><span class="content-text"> 남았어요</span>
+                    <span class="d-day-container">
+                        <span class="content-text" id="d-day-text">펀딩 종료까지 </span>
+                        <span class="blue-text" id="d-day-prefix">D-</span>
+                        <span class="blue-text d-day" id="d-day"></span>
+                        <span class="content-text" id="d-day-suffix"> 남았어요</span>
+                    </span>
                     <br>
                     <span class="gray-text">종료 일자 </span><span
                         class="gray-text last-date">{{ item.end_period|date:"Y. m. d." }}</span> <br>
                     <div class="margin-box"></div>
                     <div class="margin-box"></div>
                     <div class="margin-box"></div>
-                    <button>펀딩에 참여하기</button>
+                    <button onclick="openFundingPopup()" id="participate-funding-btn">펀딩에 참여하기</button>
                 </div>
             </div>
             <div class="content">{{ item.description }}</div>
@@ -56,8 +65,10 @@
                             <span class="content">{{ comment.content }}</span>
                             <div class="btns">
                                 {% if request.user == comment.user %}
-                                    <i class="fa-regular fa-pen-to-square" onclick="openEditPopup({{ comment.pk }}, '{{ comment.content }}')"></i>
-                                    <a href="{% url 'funfun:delete_comment' comment.pk %}"><i class="fa-regular fa-trash-can"></i></a>
+                                    <i class="fa-regular fa-pen-to-square"
+                                       onclick="openEditPopup({{ comment.pk }}, '{{ comment.content }}')"></i>
+                                    <a href="{% url 'funfun:delete_comment' comment.pk %}"><i
+                                            class="fa-regular fa-trash-can"></i></a>
                                 {% endif %}
                             </div>
                         </div>
@@ -73,6 +84,17 @@
                 {% csrf_token %}
                 <textarea name="content" id="edit-comment-content" rows="4"></textarea>
                 <button type="submit">수정하기</button>
+            </form>
+        </div>
+    </div>
+    <div id="funding-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeFundingPopup()">&times;</span>
+            <form id="funding-form" method="post" action="{% url 'funfun:add_funding' item.pk %}">
+                {% csrf_token %}
+                <label for="funding-amount">펀딩 금액 입력:</label>
+                <input type="number" id="funding-amount" name="amount" required>
+                <button type="submit">제출하기</button>
             </form>
         </div>
     </div>

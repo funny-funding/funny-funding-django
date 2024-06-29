@@ -34,7 +34,8 @@ class Item(models.Model):
     company = models.CharField(max_length=254, null=True, blank=True)
     description = models.TextField()
     price = models.IntegerField()
-    target_num = models.IntegerField()
+    current_price = models.IntegerField(default=0, blank=True)
+    participant_num = models.IntegerField(default=0, blank=True)
     start_period = models.DateTimeField(auto_now_add=True)
     end_period = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -42,7 +43,7 @@ class Item(models.Model):
     image = models.ImageField(upload_to='images/', default='')
 
     def __str__(self):
-        return f'{self.user} {self.name} {self.get_type_display()} {self.company} {self.description} {self.price} {self.target_num} {self.start_period} {self.end_period} {self.created_at} {self.updated_at}'
+        return f'{self.user} {self.name} {self.get_type_display()} {self.company} {self.description} {self.price} {self.current_price} {self.participant_num} {self.start_period} {self.end_period} {self.created_at} {self.updated_at}'
 
 
 class Investment(models.Model):

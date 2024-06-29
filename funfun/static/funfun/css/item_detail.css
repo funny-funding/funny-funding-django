@@ -6,7 +6,7 @@ body {
 .header-container {
     width: 100%;
     height: 10vh;
-    box-shadow: 0 0 20px 0 rgba(0,0,0,0.05);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
     position: fixed;
     top: 0;
     left: 0;
@@ -96,33 +96,37 @@ body {
 }
 
 .item-container > .content-container {
+    position: relative;
+    width: 50vw;
     height: 40vh;
     margin: 5vh 0;
+    align-items: center;
+    display: inline-block;
 }
 
 .item-container > .content-container > .image-box {
     position: relative;
-    width: 55%;
-    height: 100%;
+    top: -10%;
+    left: -6.5%;
+    width: 65%;
+    height: 49.5vh;
     float: left;
-    box-sizing: border-box;
-    text-align: left;
-    font-weight: 600;
-    /*background-color: #ABABAB;*/
-    display: grid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     place-items: center;
 }
+
 .item-container > .content-container > .image-box > img {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    width: 105%;
+    height: 105%;
+    object-fit: cover;
 }
 
 .item-container > .content-container > .text-box {
     position: relative;
-    width: 45%;
+    width: 35%;
     height: 100%;
-    padding-left: 5%;
     float: right;
     box-sizing: border-box;
     text-align: left;
@@ -142,10 +146,11 @@ body {
 
 .item-container > .content-container > .text-box > .content-text {
     font-size: 1vw;
-    font-weight: 600;
+    font-weight: 500;
 }
 
-.item-container > .content-container > .text-box > .blue-text {
+.item-container > .content-container > .text-box > .blue-text,
+.item-container > .content-container > .text-box > .d-day-container > .blue-text{
     color: var(--main-color);
     font-size: 1.3vw;
     font-weight: 600;
@@ -258,8 +263,8 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
     overflow: hidden;
 }
 
