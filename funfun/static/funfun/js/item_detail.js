@@ -1,3 +1,16 @@
+function openEditPopup(commentId, content) {
+    let popup = document.getElementById('edit-comment-popup');
+    let form = document.getElementById('edit-comment-form');
+    let textarea = document.getElementById('edit-comment-content');
+    textarea.value = content;
+    form.action = '/funfun/edit_comment/' + commentId + '/';
+    popup.style.display = 'block';
+}
+function closeEditPopup() {
+    let popup = document.getElementById('edit-comment-popup');
+    popup.style.display = 'none';
+}
+
 function openFundingPopup() {
     let popup = document.getElementById('funding-popup');
     popup.style.display = 'block';
