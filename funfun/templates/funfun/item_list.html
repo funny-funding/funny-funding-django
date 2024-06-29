@@ -22,7 +22,7 @@
         </div>
         <div class="items-container">
             {% for item in items %}
-                <div class="item">
+                <div class="item" onclick="location.href='{% url 'funfun:item_detail' item.pk %}'">
                     <div class="img-box">
                         <img src="{% static 'funfun/images/logo.svg' %}" alt="Logo" class="header-logo-img">
                     </div>

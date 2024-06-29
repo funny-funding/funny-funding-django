@@ -16,4 +16,6 @@ urlpatterns = [
     path('update/<int:pk>/', views.ItemUpdateView.as_view(), name='item_update'),
     path('delete/<int:pk>/', views.ItemDeleteView.as_view(), name='item_delete'),
     path('mypage/', views.MypageView.as_view(), name='mypage'),
+    path('detail/<int:pk>/', views.ItemDetailView.as_view(), name='item_detail'),
+    path('detail/<int:pk>/add_comment/', views.add_comment, name='add_comment'),
 ]
