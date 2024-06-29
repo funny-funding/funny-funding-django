@@ -5,7 +5,7 @@ function selectCategory(selected) {
     let categories = document.querySelectorAll('.category-container ul li');
 
     // 모든 카테고리를 순회하면서 클래스 제거
-    categories.forEach(function(category) {
+    categories.forEach(function (category) {
         category.classList.remove('selected-category');
     });
 
@@ -14,9 +14,27 @@ function selectCategory(selected) {
 
     // 선택된 카테고리 값 저장
     currentCategory = selected.getAttribute('data-category-id');
-    console.log('Selected Category ID:', currentCategory);
+
+    if (selected.innerText == "전체보기") {
+        currentCategory = '';
+        updateUrlParams();
+    } else {
+        updateUrlParams();
+    }
 
     updateUrlParams();  // 카테고리를 선택할 때마다 URL 업데이트
+}
+
+const updateUrlParams = () => {
+    let currentUrl = new URL(window.location.href);
+
+    if (currentCategory) {
+        currentUrl.searchParams.set('category', currentCategory);
+    } else {
+        currentUrl.searchParams.delete('category');
+    }
+
+    window.location.href = currentUrl.toString();
 }
 
 function executeSelectCategoryOnLoad() {
@@ -25,16 +43,22 @@ function executeSelectCategoryOnLoad() {
 
     if (categoryParam !== null) {
         let categoryItems = document.querySelectorAll('.category-container ul li');
-        categoryItems.forEach(function(item) {
+        categoryItems.forEach(function (item) {
             let categoryId = item.getAttribute('data-category-id');
             if (categoryId === categoryParam) {
-                selectCategory(item);  // URL에 있는 카테고리 매개변수에 따라 선택된 카테고리 표시
+                item.classList.add('selected-category');  // URL에 있는 카테고리 매개변수에 따라 선택된 카테고리 표시
+                currentCategory = categoryParam;  // 현재 카테고리 설정
             }
         });
+    } else {
+        let allCategory = document.querySelector('.category-container ul li:first-child');
+        allCategory.classList.add('selected-category');
+        currentCategory = '';
     }
 }
 
-window.onload = executeSelectCategoryOnLoad;
+document.addEventListener('DOMContentLoaded', executeSelectCategoryOnLoad);
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const searchIcon = document.getElementById('search-icon');
@@ -44,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         performSearch();
     });
 
-    searchInput.addEventListener('keydown', function(event) {
+    searchInput.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
             performSearch();
         }
@@ -64,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateUrlParams = (searchValue) => {
         let currentUrl = "http://localhost:8000/funfun/list";
 
-        if (searchValue && currentCategory) {
+        if (currentCategory) {
             currentUrl += `?category=${currentCategory}&search=${searchValue}`;  // 카테고리와 검색어가 모두 있는 URL로 업데이트
         } else if (currentCategory) {
             currentUrl += `?category=${currentCategory}`;  // 카테고리만 있는 URL로 업데이트

@@ -1,4 +1,4 @@
-.mypage-container{
+.mypage-container {
     margin-top: 19vh;
     display: flex;
     flex-direction: column;
@@ -7,21 +7,21 @@
     width: 100%;
 }
 
-.mypage-profile{
+.mypage-profile {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.mypage-name{
+.mypage-name {
     font-size: 32px;
     font-weight: bold;
     color: #000;
     text-align: center;
 }
 
-.mypage-money{
+.mypage-money {
     width: 22.6vw;
     height: 18.71vh;
     border: 1px solid #3F78E7;
@@ -30,35 +30,35 @@
     text-align: center;
 }
 
-.mypage-money-title{
+.mypage-money-title {
     font-size: 16px;
     margin-top: 3vh;
 }
 
-.mypage-money-main{
+.mypage-money-main {
     color: #3F78E7;
     font-size: 32px;
     font-weight: 600;
     margin-top: 2.15vh;
 }
 
-.mypage-money-bottom{
+.mypage-money-bottom {
     color: #ABABAB;
     font-size: 14px;
     margin-top: 2.15vh;
 }
 
-.mypage-product{
+.mypage-product {
     width: calc(100vw - 30.21vw);
     margin-top: 6.74vh;
 }
 
-.mypage-product-title{
+.mypage-product-title {
     color: #ABABAB;
     font-size: 16px;
 }
 
-.mypage-product-content{
+.mypage-product-content {
     margin-top: 2.78vh;
 }
 
@@ -75,7 +75,7 @@
     cursor: pointer;
 }
 
-.item > .img-box{
+.item > .img-box {
     height: 50%;
     width: 100%;
     place-items: center;
@@ -159,8 +159,8 @@
     color: var(--text-gray);
 }
 
-.mypage-update{
-   position: absolute;
+.mypage-update {
+    position: absolute;
     top: 10%;
     left: 75%;
     width: 3.13vw;
@@ -173,10 +173,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 16px;
 }
 
-.mypage-delete{
-   position: absolute;
+.mypage-delete {
+    position: absolute;
     top: 10%;
     left: 89%;
     width: 3.13vw;
@@ -190,4 +191,5 @@
     justify-content: center;
     align-items: center;
     border: none;
+    font-size: 16px;
 }
