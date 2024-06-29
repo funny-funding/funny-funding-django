@@ -36,6 +36,7 @@
                         <span class="content-text" id="d-day-text">펀딩 종료까지 </span>
                         <span class="blue-text" id="d-day-prefix">D-</span>
                         <span class="blue-text d-day" id="d-day"></span>
+                        <span class="blue-text d-day" id="d-day-suffix"></span>
                     </span>
                     <br>
                     <span class="gray-text">종료 일자 </span><span
@@ -91,14 +92,13 @@
             <span class="close" onclick="closeFundingPopup()">&times;</span>
             <form id="funding-form" method="post" action="{% url 'funfun:add_funding' item.pk %}">
                 {% csrf_token %}
-                <label for="funding-amount">펀딩 금액 입력:</label>
                 <input type="number" id="funding-amount" name="amount" required>
                 <button type="submit">제출하기</button>
             </form>
         </div>
     </div>
     <script>
-        var itemEndPeriod = "{{ item.end_period|date:'Y-m-dTH:i:s' }}";
+        let itemEndPeriod = "{{ item.end_period|date:'Y-m-dTH:i:s' }}";
     </script>
     <script src="{% static 'funfun/js/item_detail.js' %}"></script>
 {% endblock %}

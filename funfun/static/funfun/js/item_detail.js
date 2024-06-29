@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let dDayPrefixElement = document.getElementById('d-day-prefix');
     let dDaySuffixElement = document.getElementById('d-day-suffix');
     console.log("daysDiff: " + daysDiff);
-
+    daysDiff--;
     if (daysDiff > 0) {
         dDayElement.innerText = daysDiff;
     } else if (daysDiff === 0) {
