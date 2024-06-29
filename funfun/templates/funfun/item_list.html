@@ -10,15 +10,33 @@
         </div>
         <div class="category-container">
             <ul>
-                <li class="selected-category" onclick="selectCategory(this);">전체보기</li>
-                <li onclick="selectCategory(this);">IT</li>
-                <li onclick="selectCategory(this);">건강</li>
-                <li onclick="selectCategory(this);">음식</li>
-                <li onclick="selectCategory(this);">엔터테인먼트</li>
-                <li onclick="selectCategory(this);">사회</li>
-                <li onclick="selectCategory(this);">디자인 및 패션</li>
-                <li onclick="selectCategory(this);">농업</li>
-                <li onclick="selectCategory(this);">기타</li>
+                <li class="{% if selected_category == '' %}selected-category{% endif %}" data-category-id="0" onclick="window.location.href='/funfun/list';">
+                    <a href="?category=0">전체보기</a>
+                </li>
+                <li class="{% if selected_category == '0' %}selected-category{% endif %}" data-category-id="1" onclick="selectCategory(this);">
+                    <a href="?category=1">IT</a>
+                </li>
+                <li class="{% if selected_category == '1' %}selected-category{% endif %}" data-category-id="2" onclick="selectCategory(this);">
+                    <a href="?category=2">건강</a>
+                </li>
+                <li class="{% if selected_category == '2' %}selected-category{% endif %}" data-category-id="3" onclick="selectCategory(this);">
+                    <a href="?category=3">음식</a>
+                </li>
+                <li class="{% if selected_category == '3' %}selected-category{% endif %}" data-category-id="4" onclick="selectCategory(this);">
+                    <a href="?category=4">엔터테인먼트</a>
+                </li>
+                <li class="{% if selected_category == '4' %}selected-category{% endif %}" data-category-id="5" onclick="selectCategory(this);">
+                    <a href="?category=5">사회</a>
+                </li>
+                <li class="{% if selected_category == '5' %}selected-category{% endif %}" data-category-id="6" onclick="selectCategory(this);">
+                    <a href="?category=6">디자인 및 패션</a>
+                </li>
+                <li class="{% if selected_category == '6' %}selected-category{% endif %}" data-category-id="7" onclick="selectCategory(this);">
+                    <a href="?category=7">농업</a>
+                </li>
+                <li class="{% if selected_category == '7' %}selected-category{% endif %}" data-category-id="8" onclick="selectCategory(this);">
+                    <a href="?category=8">기타</a>
+                </li>
             </ul>
         </div>
         <div class="items-container">
@@ -30,11 +48,9 @@
                     <div class="text-box">
                         <div class="left-box">
                             <span class="title">{{ item.name }}</span> <br>
-                            <span class="money funding-money">{{ item.price }}</span><span
-                                class="funding-money">원 펀딩</span>
+                            <span class="money funding-money">{{ item.price }}</span><span class="funding-money">원 펀딩</span>
                             <div class="using-box">
-                                <span><i class="fa-regular fa-comment"></i> 0</span> <span><i
-                                    class="fa-regular fa-user"></i> {{ item.target_num }}</span>
+                                <span><i class="fa-regular fa-comment"></i> 0</span> <span><i class="fa-regular fa-user"></i> {{ item.target_num }}</span>
                             </div>
                         </div>
                         <div class="right-box">
