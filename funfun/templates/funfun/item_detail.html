@@ -6,13 +6,6 @@
 {% block title %}Item Detail{% endblock %}
 {% block content %}
     <div class="detail-container">
-        {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                    <div class="message {{ message.tags }}">{{ message }}</div>
-                {% endfor %}
-            </div>
-        {% endif %}
         <div class="item-container">
             <div class="top-box">
                 <div class="category">{{ item.get_type_display }}</div>
