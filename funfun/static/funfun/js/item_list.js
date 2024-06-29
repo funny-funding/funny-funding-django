@@ -65,9 +65,37 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentUrl = "http://localhost:8000/funfun/list";
 
         if (searchValue && currentCategory) {
-            currentUrl += `?type=${currentCategory}&search=${searchValue}`;  // 카테고리와 검색어가 모두 있는 URL로 업데이트
+            currentUrl += `?category=${currentCategory}&search=${searchValue}`;  // 카테고리와 검색어가 모두 있는 URL로 업데이트
+        } else if (currentCategory) {
+            currentUrl += `?category=${currentCategory}`;  // 카테고리만 있는 URL로 업데이트
+        } else if (searchValue) {
+            currentUrl += `?search=${searchValue}`;  // 검색어만 있는 URL로 업데이트
         }
 
         window.location.href = currentUrl;
     };
+
+    // D-Day 계산 및 펀딩 퍼센트 계산
+    document.querySelectorAll('.item').forEach(function (itemElement) {
+        let endDateString = itemElement.getAttribute('data-end-period');
+        let endDate = new Date(endDateString);
+        let today = new Date();
+        let timeDiff = endDate - today;
+        let daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        let dDayElement = itemElement.querySelector('.d-day');
+
+        if (daysDiff > 0) {
+            dDayElement.innerText = daysDiff;
+        } else if (daysDiff === 0) {
+            dDayElement.innerText = "Day";
+        } else {
+            dDayElement.innerText = "마감";
+        }
+
+        let goalMoney = parseInt(itemElement.getAttribute('data-goal-money'));
+        let successMoney = parseInt(itemElement.getAttribute('data-success-money'));
+        let currentPercent = (successMoney / goalMoney) * 100;
+        itemElement.querySelector('.percent').innerText = currentPercent.toFixed(2);
+    });
 });

@@ -322,3 +322,21 @@ body {
     color: white;
     box-sizing: border-box;
 }
+
+/*펀딩에 참여하기 팝업*/
+#funding-popup > .popup-content > form > input {
+    position: relative;
+    top: 4vh;
+    padding: 1vh;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 0.3vw;
+    margin-bottom: 2vh;
+    outline: none;
+    border: 1px solid black;
+}
+
+#funding-error-message {
+    color: red;
+    font-size: 0.9vw;
+}

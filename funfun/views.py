@@ -10,7 +10,8 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
 
 from .forms import UserForm, ItemForm
-from .models import Item, Comment, Investment
+from .models import Item, Comment, Investment, Profile
+
 
 def ItemListView(request):
     category = request.GET.get('category', '')
@@ -28,11 +29,19 @@ def ItemListView(request):
     if search:
         items = items.filter(Q(name__icontains=search))
 
+    # 아이템 정렬
+    items = items.order_by('-end_period', '-created_at')
+
+    # 각 아이템에 대한 댓글 수를 계산
+    for item in items:
+        item.comment_count = Comment.objects.filter(item=item).count()
+
     context = {
         'items': items,
         'selected_category': category,
     }
     return render(request, 'funfun/item_list.html', context)
+
 
 @login_required
 def ItemCreateView(request):
@@ -50,11 +59,22 @@ def ItemCreateView(request):
     context = {'form': form}
     return render(request, 'funfun/item_create.html', context)
 
+
 @login_required
 def add_funding(request, item_id):
     if request.method == 'POST':
         item = get_object_or_404(Item, id=item_id)
         amount = int(request.POST.get('amount'))
+        user_profile = request.user.profile
+
+        if user_profile.balance < amount:
+            messages.error(request, '자금이 부족합니다.')
+            return redirect('funfun:item_detail', pk=item_id)
+
+        if request.user.profile.balance < amount:
+            messages.error(request, '자금이 부족합니다.')
+            return redirect('funfun:item_detail', pk=item_id)
+
         item.current_price += amount
         item.save()
 
@@ -70,23 +90,19 @@ def add_funding(request, item_id):
         item.participant_num = Investment.objects.filter(item=item).count()
         item.save()
 
+        # 사용자의 잔액 업데이트
+        user_profile.balance -= amount
+        user_profile.save()
+
         return redirect('funfun:item_detail', pk=item_id)
     return redirect('funfun:item_detail', pk=item_id)
 
-def ItemUpdateView(request, pk):
-    item = get_object_or_404(Item, pk=pk)
-    form = ItemForm(request.POST or None, request.FILES or None, instance=item)
+class ItemUpdateView(UpdateView):
+    model = Item
+    fields = '__all__'
+    template_name_suffix = '_update'
+    success_url = reverse_lazy('funfun:item_list')
 
-    if form.is_valid():
-        form.save()
-        return redirect('funfun:item_detail', pk=pk)
-
-    context = {
-        'form' : form,
-        'item' : item
-    }
-
-    return render(request, 'funfun/item_update.html', context)
 
 class ItemDeleteView(DeleteView):
     model = Item
@@ -115,12 +131,14 @@ class MypageView(View):
 
     def get(self, request):
         user_items = Item.objects.filter(user=request.user)
+        profile = Profile.objects.get(user=request.user)  # 프로필 객체 가져오기
         context = {
             'username': request.user.username,
             'user_items': user_items,
+            'balance': profile.balance,
         }
-        print(context.get('user_items'))
         return render(request, self.template_name, context)
+
 
 class ItemDetailView(DetailView):
     model = Item
@@ -132,6 +150,7 @@ class ItemDetailView(DetailView):
         context['comments'] = Comment.objects.filter(item=self.object)
         return context
 
+
 @login_required
 def add_comment(request, pk):
     item = get_object_or_404(Item, pk=pk)
@@ -140,6 +159,7 @@ def add_comment(request, pk):
         if content:
             Comment.objects.create(user=request.user, item=item, content=content)
     return redirect('funfun:item_detail', pk=pk)
+
 
 @login_required
 def edit_comment(request, pk):
@@ -155,6 +175,7 @@ def edit_comment(request, pk):
             return redirect('funfun:item_detail', pk=comment.item.pk)
     context = {'comment': comment}
     return render(request, 'funfun/item_detail.html', context)
+
 
 @login_required
 def delete_comment(request, pk):

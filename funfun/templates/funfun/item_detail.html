@@ -6,6 +6,13 @@
 {% block title %}Item Detail{% endblock %}
 {% block content %}
     <div class="detail-container">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <div class="item-container">
             <div class="top-box">
                 <div class="category">{{ item.get_type_display }}</div>
@@ -36,7 +43,7 @@
                         <span class="content-text" id="d-day-text">펀딩 종료까지 </span>
                         <span class="blue-text" id="d-day-prefix">D-</span>
                         <span class="blue-text d-day" id="d-day"></span>
-                        <span class="content-text" id="d-day-suffix"> 남았어요</span>
+                        <span class="blue-text d-day" id="d-day-suffix"></span>
                     </span>
                     <br>
                     <span class="gray-text">종료 일자 </span><span
@@ -90,13 +97,17 @@
     <div id="funding-popup" class="popup">
         <div class="popup-content">
             <span class="close" onclick="closeFundingPopup()">&times;</span>
+            <div id="funding-error-message" class="error-message" style="display: none;">자금이 부족합니다.</div>
             <form id="funding-form" method="post" action="{% url 'funfun:add_funding' item.pk %}">
                 {% csrf_token %}
-                <label for="funding-amount">펀딩 금액 입력:</label>
-                <input type="number" id="funding-amount" name="amount" required>
+                <input type="number" id="funding-amount" name="amount" required placeholder="투자할 금액을 적어주세요">
                 <button type="submit">제출하기</button>
             </form>
         </div>
     </div>
+    <script>
+        let itemEndPeriod = "{{ item.end_period|date:'Y-m-dTH:i:s' }}";
+        let userBalance = {{ request.user.profile.balance }};
+    </script>
     <script src="{% static 'funfun/js/item_detail.js' %}"></script>
 {% endblock %}
