@@ -88,13 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (daysDiff > 0) {
             dDayElement.innerText = daysDiff;
         } else if (daysDiff === 0) {
-            dDayElement.innerText = "Day";
+            dDayElement.innerText = "D-Day";
         } else {
             dDayElement.innerText = "마감";
         }
 
-        let goalMoney = parseInt(itemElement.querySelector('.money.funding-money').innerText.replace('원 펀딩', '').trim());
-        let successMoney = parseInt(itemElement.querySelector('.money.funding-money').innerText.replace('원 펀딩', '').trim());
+        let goalMoney = parseInt(itemElement.getAttribute('data-goal-money'));
+        let successMoney = parseInt(itemElement.getAttribute('data-success-money'));
         let currentPercent = (successMoney / goalMoney) * 100;
         itemElement.querySelector('.percent').innerText = currentPercent.toFixed(2);
     });
