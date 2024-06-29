@@ -5,7 +5,7 @@ from . import views
 app_name = 'funfun'
 
 urlpatterns = [
-    path('', auth_views.LoginView.as_view(template_name='funfun/login.html'), name='login'),
+    path('', views.CustomLoginView.as_view(), name='login'),
     path('signup/', views.signup, name='signup'),
     path('list/', views.ItemListView, name='item_list'),
     path('create/', views.ItemCreateView, name='item_create'),
