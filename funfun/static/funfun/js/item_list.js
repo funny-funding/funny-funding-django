@@ -105,14 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
         let endDate = new Date(endDateString);
         let today = new Date();
         let timeDiff = endDate - today;
+        timeDiff+=1000000000;
         let daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
         let dDayElement = itemElement.querySelector('.d-day');
-
+        daysDiff-=12;
+        console.log("daysDiff: "+daysDiff);
         if (daysDiff > 0) {
-            dDayElement.innerText = daysDiff;
+            dDayElement.innerText = "D-"+daysDiff;
         } else if (daysDiff === 0) {
-            dDayElement.innerText = "Day";
+            dDayElement.innerText = "D-Day";
         } else {
             dDayElement.innerText = "마감";
         }

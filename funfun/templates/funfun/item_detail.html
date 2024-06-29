@@ -44,7 +44,11 @@
                     <div class="margin-box"></div>
                     <div class="margin-box"></div>
                     <div class="margin-box"></div>
-                    <button onclick="openFundingPopup()" id="participate-funding-btn">펀딩에 참여하기</button>
+                    {% if item.user == request.user %}
+                        <button id="participate-funding-btn" disabled>나의 아이템 펀딩에는 참여할 수 없어요</button>
+                    {% else %}
+                        <button onclick="openFundingPopup()" id="participate-funding-btn">펀딩에 참여하기</button>
+                    {% endif %}
                 </div>
             </div>
             <div class="content">{{ item.description }}</div>

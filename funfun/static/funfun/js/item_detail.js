@@ -45,17 +45,23 @@ document.addEventListener('DOMContentLoaded', function () {
     let endDate = new Date(itemEndPeriod);
     let today = new Date();
     let timeDiff = endDate - today;
+    console.log("timeDiff: "+timeDiff);
+    timeDiff+=1000000000;
+    console.log("timeDiff: "+timeDiff);
     let daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    console.log("daysDiff: "+daysDiff);
 
     let dDayText = document.getElementById('d-day-text');
     let dDayElement = document.getElementById('d-day');
     let dDayPrefixElement = document.getElementById('d-day-prefix');
     let dDaySuffixElement = document.getElementById('d-day-suffix');
 
+    daysDiff-=12;
+    console.log("daysDiff: "+daysDiff);
     if (daysDiff > 0) {
         dDayElement.innerText = daysDiff;
     } else if (daysDiff === 0) {
-        dDayElement.innerText = "D-Day";
+        dDayElement.innerText = "Day";
     } else {
         dDayText.innerText = "";
         dDayElement.innerText = "";
