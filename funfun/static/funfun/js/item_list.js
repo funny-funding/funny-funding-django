@@ -82,6 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (searchValue) {
             let currentUrl = "http://localhost:8000/funfun/list";
             window.location.href = `${currentUrl}?search=${searchValue}`;  // 검색어만 있는 URL로 이동
+        } else {
+            let currentUrl = "http://localhost:8000/funfun/list";
+            window.location.href = currentUrl;
         }
     };
 
