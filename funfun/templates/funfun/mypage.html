@@ -25,7 +25,7 @@
                          data-end-period="{{ item.end_period|date:'Y-m-dTH:i:s' }}" data-goal-money="{{ item.price }}"
                          data-success-money="{{ item.current_price }}">
                         <div class="img-box">
-                            <img src="{{ item.image.url }}" alt={{ item.name }}>
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}">
                         </div>
                         <div class="text-box">
                             <div class="left-box">
@@ -51,17 +51,15 @@
                             </div>
                         </a>
                         <form id="delete-form-{{ item.pk }}" method="POST"
-                              action="{% url 'funfun:item_delete' item.pk %}"
-                        >
+                              action="{% url 'funfun:item_delete' item.pk %}">
                             {% csrf_token %}
                             <button type="button" class="mypage-delete" onclick="confirmDelete({{ item.pk }})"> 삭제
                             </button>
                         </form>
                     </div>
-                    </div>
                 {% endfor %}
+            </div>
         </div>
     </div>
-    </div>
-    <script src="{% static 'funfun/js/mypage.js' %}"></script>'
+    <script src="{% static 'funfun/js/mypage.js' %}"></script>
 {% endblock %}
