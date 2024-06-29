@@ -122,7 +122,7 @@ body {
     background-color: var(--main-light-color);
     /*background-color: var(--main-light-color);*/
     color: white;
-    border: none;
+    border: 1px solid var(--main-light-color);
 }
 
 .category-container ul li.selected-category {
