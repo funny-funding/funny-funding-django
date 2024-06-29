@@ -21,7 +21,7 @@ input {
     width: 28vw;
     height: 5.5vh;
     border-radius: 0.3vw;
-    border-color: var(--input-gray);
+    border: 1px solid var(--input-gray);
     background-color: white;
     padding-left: 1vw;
     padding-right: 1vw;
@@ -52,4 +52,12 @@ button {
 #join {
     color: var(--text-gray);
     font-size: 0.8vw;
+}
+
+#login-container > form > div {
+    text-align: left;
+}
+
+#login-container > form > div > label {
+    font-weight: 600;
 }
