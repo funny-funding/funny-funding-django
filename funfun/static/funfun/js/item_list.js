@@ -108,14 +108,18 @@ document.addEventListener('DOMContentLoaded', () => {
         let endDate = new Date(endDateString);
         let today = new Date();
         let timeDiff = endDate - today;
-        timeDiff+=1000000000;
+        console.log("timeDiff: " + timeDiff);
+        timeDiff += 1000000000;
+        console.log("timeDiff: " + timeDiff);
         let daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        console.log("daysDiff: " + daysDiff);
 
         let dDayElement = itemElement.querySelector('.d-day');
-        daysDiff-=12;
-        console.log("daysDiff: "+daysDiff);
+        console.log("daysDiff: " + daysDiff);
+        daysDiff -= 12;
+        // console.log("daysDiff: "+daysDiff);
         if (daysDiff > 0) {
-            dDayElement.innerText = "D-"+daysDiff;
+            dDayElement.innerText = "D-" + daysDiff;
         } else if (daysDiff === 0) {
             dDayElement.innerText = "D-Day";
         } else {
