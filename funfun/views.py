@@ -12,6 +12,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView, D
 from .forms import UserForm, ItemForm
 from .models import Item, Comment, Investment
 
+
 def ItemListView(request):
     category = request.GET.get('category', '')
     search = request.GET.get('search', '')
@@ -28,11 +29,15 @@ def ItemListView(request):
     if search:
         items = items.filter(Q(name__icontains=search))
 
+    # 아이템 정렬
+    items = items.order_by('-end_period', '-created_at')
+
     context = {
         'items': items,
         'selected_category': category,
     }
     return render(request, 'funfun/item_list.html', context)
+
 
 @login_required
 def ItemCreateView(request):
@@ -49,6 +54,7 @@ def ItemCreateView(request):
         form = ItemForm()
     context = {'form': form}
     return render(request, 'funfun/item_create.html', context)
+
 
 @login_required
 @login_required
@@ -73,6 +79,7 @@ def add_funding(request, item_id):
 
         return redirect('funfun:item_detail', pk=item_id)
     return redirect('funfun:item_detail', pk=item_id)
+
 
 class ItemUpdateView(UpdateView):
     model = Item
@@ -115,6 +122,7 @@ class MypageView(View):
         print(context.get('user_items'))
         return render(request, self.template_name, context)
 
+
 class ItemDetailView(DetailView):
     model = Item
     template_name = 'funfun/item_detail.html'
@@ -125,6 +133,7 @@ class ItemDetailView(DetailView):
         context['comments'] = Comment.objects.filter(item=self.object)
         return context
 
+
 @login_required
 def add_comment(request, pk):
     item = get_object_or_404(Item, pk=pk)
@@ -133,6 +142,7 @@ def add_comment(request, pk):
         if content:
             Comment.objects.create(user=request.user, item=item, content=content)
     return redirect('funfun:item_detail', pk=pk)
+
 
 @login_required
 def edit_comment(request, pk):
@@ -148,6 +158,7 @@ def edit_comment(request, pk):
             return redirect('funfun:item_detail', pk=comment.item.pk)
     context = {'comment': comment}
     return render(request, 'funfun/item_detail.html', context)
+
 
 @login_required
 def delete_comment(request, pk):

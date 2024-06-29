@@ -92,7 +92,7 @@
             <span class="close" onclick="closeFundingPopup()">&times;</span>
             <form id="funding-form" method="post" action="{% url 'funfun:add_funding' item.pk %}">
                 {% csrf_token %}
-                <input type="number" id="funding-amount" name="amount" required>
+                <input type="number" id="funding-amount" name="amount" required placeholder="투자할 금액을 적어주세요">
                 <button type="submit">제출하기</button>
             </form>
         </div>
