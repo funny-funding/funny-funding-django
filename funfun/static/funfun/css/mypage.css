@@ -158,3 +158,36 @@
 .item > .text-box > .right-box > .d-day-box > span {
     color: var(--text-gray);
 }
+
+.mypage-update{
+   position: absolute;
+    top: 10%;
+    left: 75%;
+    width: 3.13vw;
+    height: 2.61vh;
+    transform: translate(-50%, -50%);
+    background-color: #504DFF;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mypage-delete{
+   position: absolute;
+    top: 10%;
+    left: 89%;
+    width: 3.13vw;
+    height: 2.61vh;
+    transform: translate(-50%, -50%);
+    background-color: #FF3232;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}

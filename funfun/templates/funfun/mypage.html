@@ -21,29 +21,41 @@
             <p class="mypage-product-title">나의 기발한 아이템들</p>
             <div class="mypage-product-content">
                 {% for item in user_items %}
-                <div class="item">
-                    <div class="img-box">
-                        <img src="{{ item.image.url }}" alt={{ item.name }}>
-                    </div>
-                    <div class="text-box">
-                        <div class="left-box">
-                            <span class="title">{{ item.name }}</span> <br>
-                            <span class="money funding-money">{{ item.price }}</span><span class="funding-money">원 펀딩</span>
-                            <div class="using-box">
-                                <span><i class="fa-regular fa-comment"></i> 10</span> <span><i
-                                    class="fa-regular fa-user"></i> 20</span>
+                    <div class="item">
+                        <div class="img-box">
+                            <img src="{{ item.image.url }}" alt={{ item.name }}>
+                        </div>
+                        <div class="text-box">
+                            <div class="left-box">
+                                <span class="title">{{ item.name }}</span> <br>
+                                <span class="money funding-money">{{ item.price }}</span><span class="funding-money">원 펀딩</span>
+                                <div class="using-box">
+                                    <span><i class="fa-regular fa-comment"></i> 10</span> <span><i
+                                        class="fa-regular fa-user"></i> 20</span>
+                                </div>
+                            </div>
+                            <div class="right-box">
+                                <span class="percent">50</span><span class="percent-text">%</span>
+                                <div class="d-day-box">
+                                    <span class="d-text">D-</span><span class="d-day">3</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="right-box">
-                            <span class="percent">50</span><span class="percent-text">%</span>
-                            <div class="d-day-box">
-                                <span class="d-text">D-</span><span class="d-day">3</span>
+                        <a href="{% url 'funfun:item_update' item.pk %}">
+                            <div class="mypage-update">
+                                수정
                             </div>
-                        </div>
+                        </a>
+                        <form id="delete-form-{{ item.pk }}" method="POST"
+                              action="{% url 'funfun:item_delete' item.pk %}">
+                            {% csrf_token %}
+                            <button type="button" class="mypage-delete" onclick="confirmDelete({{ item.pk }})"> 삭제
+                            </button>
+                        </form>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </div>
     </div>
+    <script src="{% static 'funfun/js/mypage.js' %}"></script>
 {% endblock %}
