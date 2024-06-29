@@ -1,11 +1,72 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Item Update{% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'funfun/css/item_update.css' %}">
+{% endblock %}
+
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Update">
-    </form>
+    <div class="update-container">
+        <h1 class="update-title">자신만의 독특한 아이디어를 수정해보세요!</h1>
+        <form method="POST" enctype="multipart/form-data" action="">
+            {% csrf_token %}
+            <div class="update-input-data">
+                <div class="update-input">
+                    <p class="update-subtitle">회사명</p>
+                    <input type="text" name="company" class="update-input-text" placeholder="회사명을 입력하세요"
+                           value="{{ item.company }}">
+                    {{ form.company.errors }}
+                </div>
+                <div class="update-input">
+                    <p class="update-subtitle">아이템 명</p>
+                    <input type="text" name="name" class="update-input-text" placeholder="아이템 명을 입력하세요"
+                           value="{{ item.name }}">
+                    {{ form.name.errors }}
+                </div>
+                <div class="update-input">
+                    <p class="update-subtitle">아이템 설명</p>
+                    <textarea name="description" class="update-input-textarea"
+                              placeholder="아이템 설명을 입력하세요">{{ item.description }}</textarea>
+                    {{ form.description.errors }}
+                </div>
+                <div class="update-input">
+                    <p class="update-subtitle">아이템 카테고리</p>
+                    <select name="type" class="update-input-text">
+                        {% for value, display in form.type.field.choices %}
+                            <option value="{{ value }}"
+                                    {% if form.type.value == value %}selected{% endif %}>{{ display }}</option>
+                        {% endfor %}
+                    </select>
+                    {{ form.type.errors }}
+                </div>
+                <div class="update-input">
+                    <p class="update-subtitle">투자 목표 금액</p>
+                    <input type="text" name="price" class="update-input-text" placeholder="투자 목표 금액을 입력하세요"
+                           value="{{ item.price }}">
+                    {{ form.price.errors }}
+                </div>
+                <div class="update-input">
+                    <p class="update-subtitle">투자 기간</p>
+                    <input type="date" name="end_period" class="update-input-text" placeholder="투자 받을 기간을 입력하세요"
+                           value="{{ item.end_period|date:'Y-m-d' }}">
+                    {{ form.end_period.errors }}
+                </div>
+                <div class="update-input" id="update-input">
+                    <p class="update-subtitle">이미지 등록</p>
+                    <div class="update-image" id="image-upload">
+                        <img src="{% static 'funfun/images/photo-icon.svg' %}">
+                        <p>이미지 선택</p>
+                        <input type="file" name="image" id="image-input">
+                    </div>
+                </div>
+                <div id="image-preview" class="image-preview">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                </div>
+            </div>
+            <button type="submit" class="update-submit" id="update-submit">수정하기</button>
+        </form>
+    </div>
+    <script src="{% static 'funfun/js/create.js' %}"></script>
 {% endblock %}
