@@ -1,0 +1,319 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header-container {
+    width: 100%;
+    height: 10vh;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    z-index: 1000;
+}
+
+.header-logo {
+    display: inline-block;
+    margin-left: 15.42vw;
+}
+
+.header-logo-img {
+    width: auto;
+    height: auto;
+    max-width: 80%;
+    max-height: 80%;
+    cursor: pointer;
+}
+
+.header-nav {
+    display: inline-block;
+    margin-left: 45.05vw;
+}
+
+.header-nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+}
+
+.header-nav ul li {
+    padding-right: 3.02vw;
+    font-size: 0.85vw;
+    cursor: pointer;
+}
+
+.header-nav ul a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.detail-container {
+    position: relative;
+    /*background-color: orange;*/
+    top: 8vh;
+    margin: 10vh 25vw;
+    margin-bottom: 20vh;
+}
+
+.item-container {
+    position: relative;
+    margin-bottom: 10vh;
+    /*background-color: #85A8ED;*/
+}
+
+.item-container > .top-box {
+    position: relative;
+    /*background-color: yellow;*/
+}
+
+.item-container > .top-box > .category {
+    color: white;
+    background-color: var(--main-color);
+    width: fit-content;
+    padding: 0.8vh 1.5vw;
+    border-radius: 0.5vw;
+    font-size: 0.8vw;
+}
+
+.item-container > .top-box > .company {
+    position: relative;
+    margin-top: 2vh;
+    color: var(--text-gray);
+    font-size: 1vw;
+}
+
+.item-container > .top-box > .name {
+    position: relative;
+    font-weight: 700;
+    font-size: 1.5vw;
+    margin-top: 1vh;
+}
+
+.item-container > .content-container {
+    height: 40vh;
+    margin: 5vh 0;
+}
+
+.item-container > .content-container > .image-box {
+    position: relative;
+    width: 55%;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    text-align: left;
+    font-weight: 600;
+    /*background-color: #ABABAB;*/
+    display: grid;
+    place-items: center;
+}
+.item-container > .content-container > .image-box > img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.item-container > .content-container > .text-box {
+    position: relative;
+    width: 45%;
+    height: 100%;
+    padding-left: 5%;
+    float: right;
+    box-sizing: border-box;
+    text-align: left;
+    /*background-color: white;*/
+}
+
+.margin-box {
+    position: relative;
+    height: 2vh;
+}
+
+.item-container > .content-container > .text-box > .success-money {
+    color: var(--main-color);
+    font-size: 1.7vw;
+    font-weight: 600;
+}
+
+.item-container > .content-container > .text-box > .content-text {
+    font-size: 1vw;
+    font-weight: 600;
+}
+
+.item-container > .content-container > .text-box > .blue-text {
+    color: var(--main-color);
+    font-size: 1.3vw;
+    font-weight: 600;
+}
+
+.item-container > .content-container > .text-box > .gray-text {
+    position: relative;
+    color: var(--text-gray);
+    font-size: 0.7vw;
+    padding-bottom: 190px;
+}
+
+.item-container > .content-container > .text-box > button {
+    position: relative;
+    width: 100%;
+    background-color: var(--main-color);
+    height: 4.5vh;
+    border: none;
+    border-radius: 0.3vw;
+    color: white;
+    font-size: 0.8vw;
+    margin-top: 1vh;
+    cursor: pointer;
+}
+
+.item-container > .content {
+    position: relative;
+    height: fit-content;
+    padding: 5vh 0 15vh 0;
+}
+
+.comment-container {
+    position: relative;
+    margin-bottom: 10vh;
+}
+
+.comment-container > .add-comment {
+    position: relative;
+    margin-bottom: 5vh;
+}
+
+.comment-container > .add-comment > form > .comment-input {
+    position: relative;
+    border: none;
+    border-bottom: 1px solid var(--main-color);
+    width: 89%;
+    height: 6vh;
+    font-size: 0.8vw;
+}
+
+.comment-container > .add-comment > form > .comment-btn {
+    position: relative;
+    background-color: var(--main-color);
+    color: white;
+    width: 10%;
+    height: 6vh;
+    float: right;
+    border: none;
+    border-radius: 0.3vw;
+    font-size: 0.8vw;
+}
+
+.comment-container > .comments {
+    position: relative;
+}
+
+.comment-container > .comments > .comment-box {
+    position: relative;
+    margin-bottom: 3vh;
+}
+
+.comment-container > .comments > .comment-box > .name {
+    color: var(--text-gray);
+    font-size: 0.8vw;
+    margin-bottom: 0.5vh;
+}
+
+.comment-container > .comments > .comment-box > .comment {
+    position: relative;
+    width: 96%;
+    background-color: var(--light-gray);
+    border-radius: 0.2vw;
+    padding: 2vh 1vw;
+    font-size: 0.9vw;
+}
+
+.comment-container > .comments > .comment-box > .comment > .content {
+    position: relative;
+    margin-right: 5vw;
+    /*background-color: white;*/
+}
+
+.comment-container > .comments > .comment-box > .comment > .btns {
+    position: relative;
+    float: right;
+}
+
+.comment-container > .comments > .comment-box > .comment > .btns > i,
+.comment-container > .comments > .comment-box > .comment > .btns > a > i {
+    margin-left: 0.7vw;
+    color: var(--main-color);
+}
+
+/*팝업*/
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    overflow: hidden;
+}
+
+/* Popup content */
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 0.3vw;
+    width: 30%;
+    height: 30%;
+}
+
+/* Close button */
+.close {
+    position: relative;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    top: -2vh;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.popup-content > form > textarea {
+    position: relative;
+    top: 2vh;
+    width: 100%;
+    height: 150%;
+    border-radius: 0.3vw;
+    resize: none;
+    box-sizing: border-box;
+    padding: 1vh;
+}
+
+.popup-content > form > textarea:focus {
+    outline: none; /* 기본 포커스 아웃라인 제거 */
+}
+
+.popup-content > form > button {
+    position: relative;
+    top: 5vh;
+    width: 100%;
+    height: 5vh;
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 0.3vw;
+    color: white;
+    box-sizing: border-box;
+}

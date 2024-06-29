@@ -1,15 +1,16 @@
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
 
 from .forms import UserForm, ItemForm
-from .models import Item
+from .models import Item, Comment
+
 
 
 # class SignUpView(CreateView):
@@ -58,7 +59,6 @@ def ItemListView(request):
         'selected_category': category,
     }
     return render(request, 'funfun/item_list.html', context)
-
 
 @login_required
 def ItemCreateView(request):
@@ -117,3 +117,45 @@ class MypageView(View):
         }
         print(context.get('user_items'))
         return render(request, self.template_name, context)
+
+class ItemDetailView(DetailView):
+    model = Item
+    template_name = 'funfun/item_detail.html'
+    context_object_name = 'item'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = Comment.objects.filter(item=self.object)
+        return context
+
+@login_required
+def add_comment(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        if content:
+            Comment.objects.create(user=request.user, item=item, content=content)
+    return redirect('funfun:item_detail', pk=pk)
+
+@login_required
+def edit_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.user != comment.user:
+        return redirect('funfun:item_detail', pk=comment.item.pk)
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        if content:
+            comment.content = content
+            comment.save()
+            messages.success(request, '댓글이 수정되었습니다.')
+            return redirect('funfun:item_detail', pk=comment.item.pk)
+    context = {'comment': comment}
+    return render(request, 'funfun/item_detail.html', context)
+
+@login_required
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.user == comment.user:
+        comment.delete()
+        messages.success(request, '댓글이 삭제되었습니다.')
+    return redirect('funfun:item_detail', pk=comment.item.pk)
