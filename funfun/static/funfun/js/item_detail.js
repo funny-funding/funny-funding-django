@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (daysDiff > 0) {
         dDayElement.innerText = daysDiff;
     } else if (daysDiff === 0) {
-        dDayElement.innerText = "D-Day";
+        dDayElement.innerText = "Day";
     } else {
         dDayText.innerText = "";
         dDayElement.innerText = "";
