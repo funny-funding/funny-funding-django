@@ -79,7 +79,7 @@ def ItemUpdateView(request, pk):
 
     if form.is_valid():
         form.save()
-        return redirect('funfun:mypage')
+        return redirect('funfun:item_detail', pk=pk)
 
     context = {
         'form' : form,
