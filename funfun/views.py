@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
 
 from .forms import UserForm, ItemForm
-from .models import Item, Comment, Investment
+from .models import Item, Comment, Investment, Profile
 
 
 def ItemListView(request):
@@ -57,11 +57,20 @@ def ItemCreateView(request):
 
 
 @login_required
-@login_required
 def add_funding(request, item_id):
     if request.method == 'POST':
         item = get_object_or_404(Item, id=item_id)
         amount = int(request.POST.get('amount'))
+        user_profile = request.user.profile
+
+        if user_profile.balance < amount:
+            messages.error(request, '자금이 부족합니다.')
+            return redirect('funfun:item_detail', pk=item_id)
+
+        if request.user.profile.balance < amount:
+            messages.error(request, '자금이 부족합니다.')
+            return redirect('funfun:item_detail', pk=item_id)
+
         item.current_price += amount
         item.save()
 
@@ -77,9 +86,12 @@ def add_funding(request, item_id):
         item.participant_num = Investment.objects.filter(item=item).count()
         item.save()
 
+        # 사용자의 잔액 업데이트
+        user_profile.balance -= amount
+        user_profile.save()
+
         return redirect('funfun:item_detail', pk=item_id)
     return redirect('funfun:item_detail', pk=item_id)
-
 
 class ItemUpdateView(UpdateView):
     model = Item
@@ -115,11 +127,12 @@ class MypageView(View):
 
     def get(self, request):
         user_items = Item.objects.filter(user=request.user)
+        profile = Profile.objects.get(user=request.user)  # 프로필 객체 가져오기
         context = {
             'username': request.user.username,
             'user_items': user_items,
+            'balance': profile.balance,
         }
-        print(context.get('user_items'))
         return render(request, self.template_name, context)
 
 

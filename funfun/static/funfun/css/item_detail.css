@@ -335,3 +335,8 @@ body {
     outline: none;
     border: 1px solid black;
 }
+
+#funding-error-message {
+    color: red;
+    font-size: 0.9vw;
+}

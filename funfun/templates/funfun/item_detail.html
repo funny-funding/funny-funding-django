@@ -6,6 +6,13 @@
 {% block title %}Item Detail{% endblock %}
 {% block content %}
     <div class="detail-container">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <div class="item-container">
             <div class="top-box">
                 <div class="category">{{ item.get_type_display }}</div>
@@ -90,6 +97,7 @@
     <div id="funding-popup" class="popup">
         <div class="popup-content">
             <span class="close" onclick="closeFundingPopup()">&times;</span>
+            <div id="funding-error-message" class="error-message" style="display: none;">자금이 부족합니다.</div>
             <form id="funding-form" method="post" action="{% url 'funfun:add_funding' item.pk %}">
                 {% csrf_token %}
                 <input type="number" id="funding-amount" name="amount" required placeholder="투자할 금액을 적어주세요">
@@ -99,6 +107,7 @@
     </div>
     <script>
         let itemEndPeriod = "{{ item.end_period|date:'Y-m-dTH:i:s' }}";
+        let userBalance = {{ request.user.profile.balance }};
     </script>
     <script src="{% static 'funfun/js/item_detail.js' %}"></script>
 {% endblock %}
