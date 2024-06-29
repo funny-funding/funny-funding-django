@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (daysDiff > 0) {
             dDayElement.innerText = daysDiff;
         } else if (daysDiff === 0) {
-            dDayElement.innerText = "D-Day";
+            dDayElement.innerText = "Day";
         } else {
             dDayElement.innerText = "마감";
         }

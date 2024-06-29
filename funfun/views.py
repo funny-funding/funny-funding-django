@@ -32,6 +32,10 @@ def ItemListView(request):
     # 아이템 정렬
     items = items.order_by('-end_period', '-created_at')
 
+    # 각 아이템에 대한 댓글 수를 계산
+    for item in items:
+        item.comment_count = Comment.objects.filter(item=item).count()
+
     context = {
         'items': items,
         'selected_category': category,
