@@ -36,7 +36,6 @@
                         <span class="content-text" id="d-day-text">펀딩 종료까지 </span>
                         <span class="blue-text" id="d-day-prefix">D-</span>
                         <span class="blue-text d-day" id="d-day"></span>
-                        <span class="content-text" id="d-day-suffix"> 남았어요</span>
                     </span>
                     <br>
                     <span class="gray-text">종료 일자 </span><span
@@ -98,5 +97,8 @@
             </form>
         </div>
     </div>
+    <script>
+        var itemEndPeriod = "{{ item.end_period|date:'Y-m-dTH:i:s' }}";
+    </script>
     <script src="{% static 'funfun/js/item_detail.js' %}"></script>
 {% endblock %}
