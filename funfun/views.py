@@ -98,11 +98,20 @@ def add_funding(request, item_id):
     return redirect('funfun:item_detail', pk=item_id)
 
 
-class ItemUpdateView(UpdateView):
-    model = Item
-    fields = '__all__'
-    template_name_suffix = '_update'
-    success_url = reverse_lazy('funfun:item_list')
+def ItemUpdateView(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    form = ItemForm(request.POST or None, request.FILES or None, instance=item)
+
+    if form.is_valid():
+        form.save()
+        return redirect('funfun:item_detail', pk=pk)
+
+    context = {
+        'form' : form,
+        'item' : item
+    }
+
+    return render(request, 'funfun/item_update.html', context)
 
 
 class ItemDeleteView(DeleteView):
