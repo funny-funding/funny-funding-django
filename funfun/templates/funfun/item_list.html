@@ -43,7 +43,7 @@
         </div>
         <div class="items-container">
             {% for item in items %}
-                    <div class="item">
+                    <div class="item" onclick="location.href='{% url 'funfun:item_detail' item.pk %}'" data-end-period="{{ item.end_period|date:'Y-m-dTH:i:s' }}">
                         <div class="img-box">
                             <img src="{{ item.image.url }}" alt={{ item.name }}>
                         </div>
@@ -57,9 +57,9 @@
                                 </div>
                             </div>
                             <div class="right-box">
-                                <span class="percent">50</span><span class="percent-text">%</span>
+                                <span class="percent">{{ item.funding_percent|floatformat:2 }}</span><span class="percent-text">%</span>
                                 <div class="d-day-box">
-                                    <span class="d-text">D-</span><span class="d-day">3</span>
+                                    <span class="d-text">D-</span><span class="d-day"></span>
                                 </div>
                             </div>
                         </div>
