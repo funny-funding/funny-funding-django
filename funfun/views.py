@@ -17,7 +17,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 class CustomLoginView(SuccessMessageMixin, LoginView):
     template_name = 'funfun/login.html'
-    success_message = "로그인 성공"
 
     def form_invalid(self, form):
         messages.error(self.request, "로그인 실패")
@@ -138,8 +137,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             auth.login(request, user)
-            messages.success(request, '회원가입 성공')
-            return redirect('funfun:list')
+            return redirect('funfun:item_list')
         else:
             messages.error(request, '회원가입 실패')
     else:
