@@ -21,23 +21,27 @@
             <p class="mypage-product-title">나의 기발한 아이템들</p>
             <div class="mypage-product-content">
                 {% for item in user_items %}
-                    <div class="item">
+                    <div class="item" onclick="location.href='{% url 'funfun:item_detail' item.pk %}'"
+                         data-end-period="{{ item.end_period|date:'Y-m-dTH:i:s' }}" data-goal-money="{{ item.price }}"
+                         data-success-money="{{ item.current_price }}">
                         <div class="img-box">
                             <img src="{{ item.image.url }}" alt={{ item.name }}>
                         </div>
                         <div class="text-box">
                             <div class="left-box">
                                 <span class="title">{{ item.name }}</span> <br>
-                                <span class="money funding-money">{{ item.price }}</span><span class="funding-money">원 펀딩</span>
+                                <span class="money funding-money">{{ item.current_price }}</span><span
+                                    class="funding-money">원 펀딩</span>
                                 <div class="using-box">
-                                    <span><i class="fa-regular fa-comment"></i> 10</span> <span><i
-                                        class="fa-regular fa-user"></i> 20</span>
+                                    <span><i class="fa-regular fa-comment"></i> {{ item.comment_count }}</span> <span><i
+                                        class="fa-regular fa-user"></i> {{ item.participant_num }}</span>
                                 </div>
                             </div>
                             <div class="right-box">
-                                <span class="percent">50</span><span class="percent-text">%</span>
+                                <span class="percent">{{ item.funding_percent|floatformat:2 }}</span><span
+                                    class="percent-text">%</span>
                                 <div class="d-day-box">
-                                    <span class="d-text">D-</span><span class="d-day">3</span>
+                                    <span class="d-text">D-</span><span class="d-day"></span>
                                 </div>
                             </div>
                         </div>
@@ -47,15 +51,17 @@
                             </div>
                         </a>
                         <form id="delete-form-{{ item.pk }}" method="POST"
-                              action="{% url 'funfun:item_delete' item.pk %}">
+                              action="{% url 'funfun:item_delete' item.pk %}"
+                        >
                             {% csrf_token %}
                             <button type="button" class="mypage-delete" onclick="confirmDelete({{ item.pk }})"> 삭제
                             </button>
                         </form>
                     </div>
+                    </div>
                 {% endfor %}
-            </div>
         </div>
     </div>
-    <script src="{% static 'funfun/js/mypage.js' %}"></script>
+    </div>
+    <script src="{% static 'funfun/js/mypage.js' %}"></script>'
 {% endblock %}

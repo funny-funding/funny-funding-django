@@ -97,6 +97,7 @@ def add_funding(request, item_id):
         return redirect('funfun:item_detail', pk=item_id)
     return redirect('funfun:item_detail', pk=item_id)
 
+
 class ItemUpdateView(UpdateView):
     model = Item
     fields = '__all__'
@@ -130,8 +131,13 @@ class MypageView(View):
     template_name = 'funfun/mypage.html'
 
     def get(self, request):
-        user_items = Item.objects.filter(user=request.user)
-        profile = Profile.objects.get(user=request.user)  # 프로필 객체 가져오기
+        user_items = Item.objects.filter(user=request.user).order_by('-end_period', '-created_at')
+        profile = get_object_or_404(Profile, user=request.user)
+
+        # 각 아이템에 대한 댓글 수를 계산
+        for item in user_items:
+            item.comment_count = Comment.objects.filter(item=item).count()
+
         context = {
             'username': request.user.username,
             'user_items': user_items,
