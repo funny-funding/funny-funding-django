@@ -1,6 +1,7 @@
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.utils.decorators import method_decorator
@@ -11,41 +12,10 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView, D
 from .forms import UserForm, ItemForm
 from .models import Item, Comment, Investment
 
-
-
-# class SignUpView(CreateView):
-#     form_class = CustomUserCreationForm
-#     template_name = 'funfun/signup.html'
-#     success_url = reverse_lazy('funfun:item_list')
-#
-#     def form_valid(self, form):
-#         user = form.save()
-#         login(self.request, user)
-#         return redirect(self.success_url)
-
-# class LoginView(View):
-#     form_class = CustomUserCreationForm
-#     template_name = 'funfun/login.html'
-#
-#     def get(self, request):
-#         form = self.form_class()
-#         return render(request, self.template_name, {'form': form})
-#
-#     def post(self, request):
-#         form = self.form_class(data=request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password']
-#             user = authenticate(request, username=username, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect('funfun:item_list')
-#             else:
-#                 form.add_error(None, '이메일 또는 비밀번호가 유효하지 않습니다.')
-#         return render(request, self.template_name, {'form': form})
-#
 def ItemListView(request):
     category = request.GET.get('category', '')
+    search = request.GET.get('search', '')
+
     if category == '':
         items = Item.objects.all()
     else:
@@ -54,6 +24,10 @@ def ItemListView(request):
             items = Item.objects.filter(type=category)
         except ValueError:
             items = Item.objects.all()
+
+    if search:
+        items = items.filter(Q(name__icontains=search))
+
     context = {
         'items': items,
         'selected_category': category,
