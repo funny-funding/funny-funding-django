@@ -112,11 +112,11 @@
 }
 
 .image-preview img {
-    max-width: 100px;
-    max-height: 100px;
-    margin: 5px;
+    max-width: 140px;
+    max-height: 140px;
     border: 1px solid #d2d2d2;
     border-radius: 5px;
+    margin-top: 3.24vh;
 }
 
 .create-submit{
@@ -125,7 +125,7 @@
     background: #3F78E7;
     border-radius: 6px;
     height: 5.51vh;
-    margin-top: 6.11vh;
+    margin-top: 3.24vh;
     margin-bottom: 10vh;
     color: #fff;
     font-size: 20px;
